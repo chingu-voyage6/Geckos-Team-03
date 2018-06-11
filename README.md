@@ -1,2 +1,7 @@
 # Geckos-Team-03
-Add-project-description-here | Chingu Voyage-6 | https://chingu.io/
+
+Our task management / pomodoro timer / todo list app
+
+[Our Trello board](https://trello.com/geckosteam3)
+
+Chingu Voyage-6 | https://chingu.io/
