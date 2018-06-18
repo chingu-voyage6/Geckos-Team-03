@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #fefefe;
+}
+.App {
+  width: 80%;
+  max-width: 1100px;
+  text-align: center;
+  margin: 10vh auto;
+}
+.logo {
+  width: 100%;
+  z-index: 0;
+}
