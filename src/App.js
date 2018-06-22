@@ -4,7 +4,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <img alt="Lucid infinity logo" className="logo" src={require('./images/lucid.png')} />
+        <h1 className="logo-text">LUCID</h1>
+        <img alt="Lucid infinity logo" className="logo" src={require('./images/lucid-logo.png')} />
       </div>
     );
   }
