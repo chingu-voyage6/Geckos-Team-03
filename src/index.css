@@ -1,21 +1,87 @@
+/* colour vars can go here */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  background: url(images/bg-top-left.svg) top left / 50% no-repeat;
+  background-color: #f5f5f5;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: Josefin Sans, sans-serif;
-  background: #2698a5;
-}
-.App {
-  width: 80%;
-  max-width: 1100px;
-  text-align: center;
-  margin: 10vh auto;
-}
-.logo {
-  width: 100%;
-  z-index: 0;
+  font-family: sans-serif;
+  height: 100%;
+  line-height: 1.75;
+  font-size: 18px;
+  color: #272727;
 }
 
-.logo-text {
-  font-size: 4em;
-  color: white;
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.header {
+  width: 80%;
+  height: 125px;
+  max-width: 1020px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+
+.header-group {
+  position: absolute;
+  bottom: 20px;
+}
+
+.logo {
+  width: 115px;
+  display: inline-block;
+}
+
+h1.header-title {
+  line-height: 1;
+  text-transform: lowercase;
+  font-size: 3em;
+  color: #70cce0;
+  display: inline-block;
+  margin: 0;
+  padding: 0 .5em;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+}
+
+.app {
+  border-top: 24px solid #93aec2;
+  width: 80%;
+  max-width: 1020px;
+  margin: 0 auto 125px auto;
+  background: #fff;
+  box-shadow: 0 36px 51px rgba(0,0,0,0.1);
+  display: flex;
+}
+
+.main-content {
+  padding: 2em;
+  width: 57%;
+}
+
+.sidebar {
+  padding: 2em;
+  background: #eff5fc;
+  width: 43%;
+}
+
+.footer {
+  background: url(images/bg-bottom-right.svg) bottom right / 80% no-repeat;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -101;
+  /* box-shadow: 0 2px 50px #949494; */
 }
