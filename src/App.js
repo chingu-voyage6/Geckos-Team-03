@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class App extends Component {
   render() {
     return (
+      // most of these divs will turn into actual components
       <div className="container">
         <div className="header">
           <div className="header-group">
@@ -12,10 +13,24 @@ class App extends Component {
         </div>
         <div className="app">
           <div className="main-content">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <input className='main-input' placeholder="What do you want to get done?" />
 
-            Why do we use it?
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            <h3 className='btn-add-project'>Add Project</h3>
+
+            <h3 className='project-title'>Lucid Chingu Project</h3>
+            <ul className='project-tasks'>
+              <li className='project-task-completed'>Define our MVP for the project</li>
+              <li className='project-selected'>Clear direction for design and workflow</li>
+              <li>Define the individual components we will pull together</li>
+            </ul>
+
+            <h3 className='project-title'>Another React App</h3>
+            <ul className='project-tasks'>
+              <li className='project-task-completed'>Get audio working in React</li>
+              <li>Implement settings for global and each individual timer</li>
+            </ul>
+
+
             </div>
           <div className="sidebar">
             Where does it come from?

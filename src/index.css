@@ -40,6 +40,7 @@ body {
 .logo {
   width: 115px;
   display: inline-block;
+  padding-top: 10px;
 }
 
 h1.header-title {
@@ -65,12 +66,12 @@ h1.header-title {
 }
 
 .main-content {
-  padding: 2em;
+  padding: 2.2em;
   width: 57%;
 }
 
 .sidebar {
-  padding: 2em;
+  padding: 2.2em;
   background: #eff5fc;
   width: 43%;
 }
@@ -84,4 +85,80 @@ h1.header-title {
   height: 100%;
   z-index: -101;
   /* box-shadow: 0 2px 50px #949494; */
+}
+
+.main-input {
+  width: 100%;
+  height: 2em;
+  border: none;
+  font-size: 1.35em;
+  margin-bottom: 1em;
+  border-bottom: 3px solid #1179a5;
+  padding: .5em;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 1em;
+  padding-left: .5rem;
+}
+
+h3.btn-add-project {
+  color: #62ba6c;
+  position: relative;
+  padding-bottom: .5em;
+}
+
+h3.btn-add-project::before {
+  content: '+';
+  position: absolute;
+  left: -.8em;
+  top: -.3em;
+  color: #000;
+  font-size: 1.2em;
+}
+
+h3.project-title {
+  color: #1179a5;
+  border-bottom: 3px solid #f6f6f6;
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+h3.project-title::before {
+  content: '▶';
+  position: absolute;
+  left: -1.5em;
+  top: 0.5em;
+  color: #000;
+  font-size: 0.6em;
+}
+
+ul.project-tasks {
+  list-style: none;
+}
+ul.project-tasks li {
+  margin-bottom: 1.5em;
+  font-size: 0.9em;
+  position: relative;
+}
+
+ul.project-tasks li:not(.project-task-completed)::before {
+  content: url(images/checkbox.svg);
+  position: absolute;
+  left: -2em;
+  top: .1em;
+}
+
+ul.project-tasks li.project-task-completed {
+  text-decoration: line-through;
+}
+ul.project-tasks li.project-task-completed::before {
+  content: url(images/checkbox-filled.svg);
+  position: absolute;
+  left: -2em;
+}
+
+ul.project-tasks li.project-selected {
+  border-bottom: 6px solid #62ba6C;
 }
