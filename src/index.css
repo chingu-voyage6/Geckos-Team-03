@@ -1,21 +1,176 @@
+/* colour vars can go here */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  background: url(images/bg-top-left.svg) top left / 50% no-repeat;
+  background-color: #f5f5f5;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: Josefin Sans, sans-serif;
-  background: #2698a5;
-}
-.App {
-  width: 80%;
-  max-width: 1100px;
-  text-align: center;
-  margin: 10vh auto;
-}
-.logo {
-  width: 100%;
-  z-index: 0;
+  font-family: sans-serif;
+  height: 100%;
+  line-height: 1.75;
+  font-size: 18px;
+  color: #272727;
 }
 
-.logo-text {
-  font-size: 4em;
-  color: white;
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.header {
+  width: 80%;
+  height: 125px;
+  max-width: 1020px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+
+.header-group {
+  position: absolute;
+  bottom: 20px;
+}
+
+.logo {
+  width: 115px;
+  display: inline-block;
+  padding-top: 10px;
+}
+
+h1.header-title {
+  line-height: 1;
+  text-transform: lowercase;
+  font-size: 3em;
+  color: #70cce0;
+  display: inline-block;
+  margin: 0;
+  padding: 0 .5em;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+}
+
+.app {
+  border-top: 24px solid #93aec2;
+  width: 80%;
+  max-width: 1020px;
+  margin: 0 auto 125px auto;
+  background: #fff;
+  box-shadow: 0 36px 51px rgba(0,0,0,0.1);
+  display: flex;
+}
+
+.main-content {
+  padding: 2.2em;
+  width: 57%;
+}
+
+.sidebar {
+  padding: 2.2em;
+  background: #eff5fc;
+  width: 43%;
+}
+
+.footer {
+  background: url(images/bg-bottom-right.svg) bottom right / 80% no-repeat;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -101;
+  /* box-shadow: 0 2px 50px #949494; */
+}
+
+.main-input {
+  width: 100%;
+  height: 2em;
+  border: none;
+  font-size: 1.35em;
+  margin-bottom: 1em;
+  border-bottom: 3px solid #1179a5;
+  padding: .5em;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 1em;
+  padding-left: .5rem;
+}
+
+h3.btn-add-project {
+  color: #62ba6c;
+  position: relative;
+  padding-bottom: .5em;
+}
+
+h3.btn-add-project::before {
+  content: '+';
+  position: absolute;
+  left: -.8em;
+  top: -.3em;
+  color: #000;
+  font-size: 1.2em;
+}
+
+h3.project-title {
+  color: #1179a5;
+  border-bottom: 3px solid #f6f6f6;
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+h3.project-title::before {
+  content: '▶';
+  position: absolute;
+  left: -1.5em;
+  top: 0.5em;
+  color: #000;
+  font-size: 0.6em;
+}
+
+h3.project-title .options-icon {
+  float: right;
+  margin-top: .7em;
+}
+
+ul.project-tasks {
+  list-style: none;
+}
+ul.project-tasks li {
+  margin-bottom: 1.5em;
+  font-size: 0.9em;
+  position: relative;
+}
+
+ul.project-tasks li:not(.project-task-completed)::before {
+  content: url(images/checkbox.svg);
+  position: absolute;
+  left: -2em;
+  top: .1em;
+}
+
+ul.project-tasks li.project-task-completed {
+  text-decoration: line-through;
+}
+ul.project-tasks li.project-task-completed::before {
+  content: url(images/checkbox-filled.svg);
+  position: absolute;
+  left: -2em;
+}
+
+ul.project-tasks li.project-selected {
+  border-bottom: 6px solid #62ba6C;
+}
+
+.sidebar-main-title {
+  font-size: 1em;
+  color: #1179a5;
+  font-weight: 400;
+  border-bottom: 3px solid #93aec2;
 }
