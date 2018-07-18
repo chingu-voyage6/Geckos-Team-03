@@ -17,14 +17,20 @@ class App extends Component {
 
             <h3 className='btn-add-project'>Add Project</h3>
 
-            <h3 className='project-title'>Lucid Chingu Project</h3>
+              <h3 className='project-title'>Lucid Chingu Project
+              <img className='options-icon' src={require('./images/options-icon.svg')} alt='options' />
+              </h3>
+
             <ul className='project-tasks'>
               <li className='project-task-completed'>Define our MVP for the project</li>
               <li className='project-selected'>Clear direction for design and workflow</li>
               <li>Define the individual components we will pull together</li>
             </ul>
 
-            <h3 className='project-title'>Another React App</h3>
+            <h3 className='project-title'>Another React app
+              <img className='options-icon' src={require('./images/options-icon.svg')} alt='options' />
+            </h3>
+
             <ul className='project-tasks'>
               <li className='project-task-completed'>Get audio working in React</li>
               <li>Implement settings for global and each individual timer</li>

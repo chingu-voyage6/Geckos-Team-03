@@ -134,6 +134,11 @@ h3.project-title::before {
   font-size: 0.6em;
 }
 
+h3.project-title .options-icon {
+  float: right;
+  margin-top: .7em;
+}
+
 ul.project-tasks {
   list-style: none;
 }
