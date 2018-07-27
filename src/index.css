@@ -1,11 +1,23 @@
-/* colour vars can go here */
+/* colour vars */
+:root {
+  --darkblue: #1179a5;
+  --babyblue: #70cce0;
+  --lightblue: #eff5fc;
+  --green: #62ba6c;
+  --black: #272727;
+  --grey: #93aec2;
+
+  /* just used for bg now */
+  --lightgrey: #f5f5f5;
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
 html {
   height: 100%;
   background: url(images/bg-top-left.svg) top left / 50% no-repeat;
-  background-color: #f5f5f5;
+  background-color: var(--lightgrey);
 }
 body {
   margin: 0;
@@ -14,7 +26,7 @@ body {
   height: 100%;
   line-height: 1.75;
   font-size: 18px;
-  color: #272727;
+  color: var(--black);
 }
 
 .container {
@@ -47,7 +59,7 @@ h1.header-title {
   line-height: 1;
   text-transform: lowercase;
   font-size: 3em;
-  color: #70cce0;
+  color: var(--babyblue);
   display: inline-block;
   margin: 0;
   padding: 0 .5em;
@@ -56,7 +68,7 @@ h1.header-title {
 }
 
 .app {
-  border-top: 24px solid #93aec2;
+  border-top: 24px solid var(--grey);
   width: 80%;
   max-width: 1020px;
   margin: 0 auto 125px auto;
@@ -72,7 +84,7 @@ h1.header-title {
 
 .sidebar {
   padding: 2.2em;
-  background: #eff5fc;
+  background: var(--lightblue);
   width: 43%;
 }
 
@@ -84,7 +96,6 @@ h1.header-title {
   width: 100%;
   height: 100%;
   z-index: -101;
-  /* box-shadow: 0 2px 50px #949494; */
 }
 
 .main-input {
@@ -93,20 +104,30 @@ h1.header-title {
   border: none;
   font-size: 1.35em;
   margin-bottom: 1em;
-  border-bottom: 3px solid #1179a5;
+  border-bottom: 3px solid var(--darkblue);
   padding: .5em;
+}
+
+.main-input:focus {
+  outline: none;
+  border-bottom: 3px solid var(--babyblue);
 }
 
 h3 {
   font-weight: 400;
   font-size: 1em;
   padding-left: .5rem;
+  margin: 0;
 }
 
 h3.btn-add-project {
-  color: #62ba6c;
+  color: var(--green);
   position: relative;
   padding-bottom: .5em;
+}
+
+.btn-add-project:hover {
+  cursor: pointer;
 }
 
 h3.btn-add-project::before {
@@ -114,29 +135,75 @@ h3.btn-add-project::before {
   position: absolute;
   left: -.8em;
   top: -.3em;
-  color: #000;
+  color: var(--black);
   font-size: 1.2em;
 }
 
-h3.project-title {
-  color: #1179a5;
-  border-bottom: 3px solid #f6f6f6;
-  position: relative;
-  margin-bottom: 1.5em;
+.task-item:hover {
+  cursor: pointer;
 }
 
-h3.project-title::before {
+.project-group {
+  color: var(--darkblue);
+  position: relative;
+  margin: 1em 0 1em 0;
+}
+
+.project-group h3 {
+  border-bottom: 3px solid var(--lightgrey);
+}
+
+.project-group input.toggle-collapse {
+  position: absolute;
+  left: -1.5em;
+  top: 0.5em;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  z-index: 100;
+  opacity: 0;
+}
+
+.project-group input.toggle-collapse:hover {
+  cursor: pointer;
+}
+
+.project-group h3::before {
   content: '▶';
   position: absolute;
   left: -1.5em;
   top: 0.5em;
-  color: #000;
+  color: var(--black);
   font-size: 0.6em;
+  transform: rotate(90deg);
+  transition: .1s;
 }
 
-h3.project-title .options-icon {
-  float: right;
-  margin-top: .7em;
+.project-group input.toggle-collapse:checked + h3::before {
+  transform: rotate(0deg);
+}
+
+.project-group input.toggle-collapse:checked ~ ul {
+  max-height: 0;
+}
+
+.project-group .options-icon {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
+.project-group .options-icon:hover {
+  cursor: pointer;
+}
+
+.project-group ul {
+  color: var(--black);
+  transition: .6s;
+  overflow: hidden;
+  max-height: 1000px;
 }
 
 ul.project-tasks {
@@ -148,29 +215,49 @@ ul.project-tasks li {
   position: relative;
 }
 
-ul.project-tasks li:not(.project-task-completed)::before {
-  content: url(images/checkbox.svg);
+ul.project-tasks input {
   position: absolute;
-  left: -2em;
-  top: .1em;
+  top: .1rem;
+  left: -2rem;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 100;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
 }
 
-ul.project-tasks li.project-task-completed {
+ul.project-tasks .checkTask {
+  position: absolute;
+  top: .1rem;
+  left: -2rem;
+  height: 20px;
+  width: 20px;
+  border-radius: 6px;
+  background: #d8d8d8;
+}
+
+ul.project-tasks input:hover + .checkTask {
+  background: #ccc;
+}
+
+ul.project-tasks input:checked + .checkTask {
+  background: var(--green);
+}
+
+ul.project-tasks input:checked ~ .task-item {
   text-decoration: line-through;
 }
-ul.project-tasks li.project-task-completed::before {
-  content: url(images/checkbox-filled.svg);
-  position: absolute;
-  left: -2em;
+
+ul.project-tasks .project-task-selected {
+  border-bottom: 6px solid var(--green);
 }
 
-ul.project-tasks li.project-selected {
-  border-bottom: 6px solid #62ba6C;
-}
 
 .sidebar-main-title {
   font-size: 1em;
-  color: #1179a5;
+  color: var(--darkblue);
   font-weight: 400;
-  border-bottom: 3px solid #93aec2;
+  border-bottom: 3px solid var(--grey);
 }
