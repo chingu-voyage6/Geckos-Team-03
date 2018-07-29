@@ -210,7 +210,7 @@ ul.project-tasks {
   list-style: none;
 }
 ul.project-tasks li {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.8em;
   font-size: 0.9em;
   position: relative;
 }
@@ -250,8 +250,19 @@ ul.project-tasks input:checked ~ .task-item {
   text-decoration: line-through;
 }
 
-ul.project-tasks .project-task-selected {
-  border-bottom: 6px solid var(--green);
+
+.task-border {
+  height: 6px;
+  width: 100%;
+  background: var(--green);
+  position: absolute;
+  bottom: -.3em;
+  transition: .3s;
+  max-width: 0;
+}
+
+.mwidth-100 {
+  max-width: 100%;
 }
 
 
