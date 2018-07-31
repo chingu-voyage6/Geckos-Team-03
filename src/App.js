@@ -17,67 +17,31 @@ class TaskList extends Component {
   render() { 
     return (
     <div>
-    <div className='project-group'>
+
+    {this.props.projects.map(project => {
+      return (
+        <div key={project.id} className='project-group'>
         <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
         <h3>
-          Lucid Chingu Project
-          <div className='options-icon'>
-            <img src={require('./images/options-icon.svg')} alt='options' />
-          </div>
+          {project.name}
         </h3>
+        <ul className='project-tasks'>
+          {this.props.tasks.map(task => {
+            if (task.project === project.id) return (
+              <li key={task.id}>
+                <input type="checkbox" /> <span className="checkTask" />
+                <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
+                  {task.name}
+                </span>
+                {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
+              </li>
+            )
+          })}
+        </ul>
+        </div>
+      )
+    })}
 
-      <ul className='project-tasks'>
-        <li>
-          <input type="checkbox" /> <span className="checkTask" />
-          <span className="task-item">
-            Define our MVP for the project
-          </span>
-          <div className='task-border' />
-        </li>
-        <li>
-          <input type="checkbox" /> <span className="checkTask" />
-          <span className="task-item">
-            Clear direction for design and workflow
-          </span>
-          <div className='task-border' />
-        </li>
-        <li onClick={e => [...e.target.parentElement.children].filter(el=> el.classList.contains('task-border'))[0].classList.add('mwidth-100')}>
-        <input type="checkbox" /> <span className="checkTask" />
-          <span className="task-item">
-            Define the components we will pull together
-          </span>
-          {/* Here would go 'if project task is selected then add in this div' */}
-          <div className='task-border' />
-        </li>
-      </ul>
-  </div>
-
-  <div className='project-group'>
-        <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
-        <h3>
-          Another React App
-          <div className='options-icon'>
-            <img src={require('./images/options-icon.svg')} alt='options' />
-          </div>
-        </h3>
-
-      <ul className='project-tasks'>
-        <li>
-          <input type="checkbox" /> <span className="checkTask" />
-          <span className="task-item">
-            Get audio working in React
-          </span>
-          <div className='task-border' />
-        </li>
-        <li>
-        <input type="checkbox" /> <span className="checkTask" />
-          <span className="task-item">
-            Implement settings for global and each individual timer
-          </span>
-          <div className='task-border' />
-        </li>
-      </ul>
-    </div>
     </div>
   )}
 }
@@ -92,9 +56,71 @@ class Sidebar extends Component {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    const uuidv4 = require('uuid/v4');
+    this.chinguId = uuidv4();
+    this.anotherId = uuidv4();
+    this.state = {
+      projects: [
+        {
+          name: 'Lucid Chingu project',
+          id: this.chinguId,
+        },
+        {
+          name: 'Another React app',
+          id: this.anotherId,
+        },
+      ],
+      tasks: [
+        {
+          name: 'Define our mvp for the project',
+          id: uuidv4(),
+          project: this.chinguId,
+          selected: false,
+        },
+        {
+          name: 'Clear direction for design and workflow',
+          id: uuidv4(),
+          project: this.chinguId,
+          selected: false,
+        },
+        {
+          name: 'Define the components we will pull together',
+          id: uuidv4(),
+          project: this.chinguId,
+          selected: false,
+        },
+        {
+          name: 'Get audio working in React',
+          id: uuidv4(),
+          project: this.anotherId,
+          selected: false,
+        },
+        {
+          name: 'Implement settings for global and each individual timer',
+          id: uuidv4(),
+          project: this.anotherId,
+          selected: false,
+        },
+      ]
+    }
+    this.handleSelectTask = this.handleSelectTask.bind(this);
+  }
+
+  handleSelectTask(e) {
+    console.log(e.target.dataset.id);
+    const tasks = [...this.state.tasks];
+    tasks.forEach(task => {
+      task.id === e.target.dataset.id
+        ? task.selected = !task.selected
+        : task.selected = false;
+    });
+    this.setState({ tasks });
+  }
+
   render() {
     return (
-      // most of these divs will turn into actual components
       <div className="container">
         <div className="header">
           <div className="header-group">
@@ -107,7 +133,7 @@ class App extends Component {
 
             <TaskInput />
             <AddProject />
-            <TaskList />
+            <TaskList {...this.state} onSelectTask={this.handleSelectTask}/>
 
           </div>
 
