@@ -1,0 +1,22 @@
+/* So the first css file - define global styling for Pomodoro module */
+.pomodoro-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 2em 0;
+  padding: 1em .5em;
+  background: #fff;
+  border-bottom: 3px solid var(--darkblue);
+  transition: .3s;
+}
+
+.pomodoro:first-of-type {
+  margin-top:7em;
+}
+
+.pomodoro-details {
+  display: flex;
+  flex-direction: column;
+}

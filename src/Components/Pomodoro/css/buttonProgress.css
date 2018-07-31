@@ -1,0 +1,73 @@
+
+  /* --------------------------------------------------------------------------- */
+ /*                                PLAY/PAUSE/RESET BUTTONS                     */
+/* --------------------------------------------------------------------------- */
+
+.buttons-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.reset-button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.reset-button:hover {
+  color: #d00;
+  cursor: pointer;
+}
+
+.button-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  /* rigid font-size to keep dimensions */
+  font-size: 42px;
+  transition: 1s;
+}
+
+.button-progress:hover {
+  cursor: pointer;
+}
+
+.button-progress-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  
+  /* 120px - 10px for each side where the progress runs */
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  font-size: 1em;
+}
+
+.progress-canvas {
+  height: 120px;
+  width: 120px;
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  left:0;
+  transition: border .5s;
+}
+
+.progress-canvas:hover {
+  cursor: pointer;
+}
+
+.fa-play {
+  margin-left: 12px;
+}

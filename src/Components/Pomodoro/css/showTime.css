@@ -1,0 +1,17 @@
+
+  /* --------------------------------------------------------------------------- */
+ /*                                SHOW TIME COMPONENT                          */
+/* --------------------------------------------------------------------------- */
+
+.show-time {
+  display: flex;
+  font-size: 3em;
+  color: var(--darkblue);
+  /* background: var(--lightgrey); */
+  padding: .1em;
+  margin: .1em;
+  line-height: 1em;
+  border-radius: 6px;
+  /* border: 1px solid red; */
+}
+
