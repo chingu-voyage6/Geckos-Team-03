@@ -88,6 +88,9 @@ class Sidebar extends Component {
     <div className="sidebar">
       <h2 className='sidebar-main-title'>Clear direction for design and workflow</h2>
       <Pomodoro />
+      {/* And any other tools for this timer... */}
+      <h3 className='add-tool'>Add Tool</h3>
+
     </div>
   )}
 }

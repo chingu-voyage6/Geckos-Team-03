@@ -117,6 +117,26 @@ h1.header-title {
   text-align: center;
 }
 
+.add-tool {
+  color: var(--darkblue);
+  position: relative;
+  display: inline-block;
+  padding: .1em;
+  padding-left: 1.5em;
+}
+.add-tool:before {
+  content: '+ ';
+  position: absolute;
+  font-size: 1.2em;
+  left: 0;
+  top: -.2em;
+}
+.add-tool:hover {
+  cursor: pointer;
+  color: var(--babyblue);
+  border-bottom: 3px solid var(--babyblue);
+}
+
 .footer {
   background: url(images/bg-bottom-right.svg) bottom right / 80% no-repeat;
   position: absolute;
