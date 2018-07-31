@@ -83,9 +83,58 @@ h1.header-title {
 }
 
 .sidebar {
-  padding: 2.2em;
   background: var(--lightblue);
   width: 43%;
+  position: relative;
+  text-align: center;
+}
+
+.sidebar > *:not(.sidebar-main-title) {
+  transition: .3s;
+  opacity: .9;
+}
+
+.sidebar > *:hover {
+  opacity: 1;
+}
+
+.sidebar:hover{
+  opacity:1;
+}
+
+.sidebar-main-title {
+  font-size: 1.1em;
+  color: var(--darkblue);
+  font-weight: 400;
+  border-bottom: 3px solid var(--grey);
+  background: white;
+  position:absolute;
+  width: 100%;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 2.3em 0 .4em 0;
+  text-align: center;
+}
+
+.add-tool {
+  color: var(--darkblue);
+  position: relative;
+  display: inline-block;
+  padding: .1em;
+  padding-left: 1.5em;
+}
+.add-tool:before {
+  content: '+ ';
+  position: absolute;
+  font-size: 1.2em;
+  left: 0;
+  top: -.2em;
+}
+.add-tool:hover {
+  cursor: pointer;
+  color: var(--babyblue);
+  border-bottom: 3px solid var(--babyblue);
 }
 
 .footer {
@@ -266,9 +315,3 @@ ul.project-tasks input:checked ~ .task-item {
 }
 
 
-.sidebar-main-title {
-  font-size: 1em;
-  color: var(--darkblue);
-  font-weight: 400;
-  border-bottom: 3px solid var(--grey);
-}

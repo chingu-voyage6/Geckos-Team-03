@@ -1,0 +1,133 @@
+
+  /* ---------------------------------------------------- */
+ /*                              sound settings          */
+/* ---------------------------------------------------- */
+
+.settings-sound {
+  /* allow progress circles to wrap */
+  flex-wrap: wrap;
+  text-align: center;
+  border-bottom: 1px solid var(--faintgrey);
+  border-top: 1px solid var(--faintgrey);
+  padding-bottom: 15px;
+}
+
+.sound-prev-arrow,
+.sound-next-arrow {
+  font-size: .8em;
+  color: var(--darkgrey);
+  transition: color .3s;
+}
+
+.sound-prev-arrow:hover,
+.sound-next-arrow:hover {
+  cursor: pointer;
+}
+
+.settings-sound-work:hover .sound-prev-arrow,
+.settings-sound-work:hover .sound-next-arrow {
+  color: var(--lightred);
+}
+.settings-sound-break:hover .sound-prev-arrow,
+.settings-sound-break:hover .sound-next-arrow {
+  color: var(--lightorange);
+}
+.settings-sound-longBreak:hover .sound-prev-arrow,
+.settings-sound-longBreak:hover .sound-next-arrow {
+  color: var(--lightgreen);
+}
+
+.settings-sound .sound-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--medgrey);
+  padding: 2px;
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
+  margin-right: .5em;
+  transition: background .3s;
+  position: absolute;
+  left: 2em;
+}
+
+.settings-item:hover .sound-icon {
+  background: var(--lightgrey);
+  cursor: pointer;
+}
+
+.settings-sound i {
+  font-size: .7em;
+  color: var(--darkgrey);
+}
+
+.settings-sound ul {
+  margin: 0;
+  padding: .5em;
+}
+
+.settings-sound ul li {
+  list-style: none;
+  text-align: center;
+  transition: .2s;
+  padding: .5em 0;
+}
+
+.settings-sound ul li:hover {
+  cursor: pointer;
+  color: var(--lightgrey);
+}
+
+.settings-sound:hover .sound-progress-tab {
+  opacity: 1;
+}
+
+.sound-hidden {
+  display: none;
+}
+
+.sound-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 12px;
+  border-radius: 6px;
+  flex-basis: 100%;
+  padding-bottom: 15px;
+}
+
+.sound-progress-tab {
+  background: var(--medgrey);
+  height: 13px;
+  width: 13px;
+  margin: 0 4px;
+  border-radius: 100%;
+  transition: .3s;
+  opacity: 0;
+}
+.sound-progress-tab:hover {
+  cursor: pointer;
+  background: var(--lightgrey);
+}
+
+.settings-work .sound-progress-tab:hover:not(.sound-progress-tab-active) {
+  background: var(--darkred);
+}
+.settings-work .sound-progress-tab-active {
+  background: var(--lightred);
+}
+.settings-break .sound-progress-tab:hover:not(.sound-progress-tab-active) {
+  background: var(--darkorange);
+}
+.settings-break .sound-progress-tab-active {
+  background: var(--lightorange);
+}
+.settings-long-break .sound-progress-tab:hover:not(.sound-progress-tab-active) {
+  background: var(--darkgreen);
+}
+.settings-long-break .sound-progress-tab-active {
+  background: var(--lightgreen);
+}
