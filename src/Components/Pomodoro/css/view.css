@@ -10,13 +10,30 @@
   background: #fff;
   border-bottom: 3px solid var(--darkblue);
   transition: .3s;
-}
-
-.pomodoro:first-of-type {
-  margin-top:7em;
+  position: relative;
+  max-height: 0;
+  overflow: hidden;
+  transition: .3s;
+  opacity: 0;
 }
 
 .pomodoro-details {
   display: flex;
   flex-direction: column;
+}
+
+.tool-close {
+  position: absolute;
+  top: .8em;
+  right: .4em;
+  background: var(--lightgrey);
+  font-size: .8em;
+  padding: .2em .6em;
+  transition: background .3s;
+}
+
+.tool-close:hover {
+  cursor: pointer;
+  background: #f00;
+  color: #fff;
 }

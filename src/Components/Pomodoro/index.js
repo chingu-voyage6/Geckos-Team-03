@@ -130,6 +130,10 @@ class Pomodoro extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.setMouseDown);
     document.removeEventListener('mouseup', this.setMouseUp);
+
+    // helping ensure there are no memory leaks
+    let activeTimer = {...this.state.activeTimer};
+    clearInterval(activeTimer.intervalID);
   }
 
 
@@ -251,7 +255,7 @@ class Pomodoro extends Component {
     return (
       <div className="pomodoro">
 
-        <View {...this.state} changeState={this.changeState} onTimerEnd={this.onTimerEnd} timerClone timerFunc={this.timerFunc} onSampleSound={this.handleSampleSound} />
+        <View {...this.state} {...this.props} changeState={this.changeState} onTimerEnd={this.onTimerEnd} timerClone timerFunc={this.timerFunc} onSampleSound={this.handleSampleSound} onDeleteTool={this.props.onDeleteTool} />
         <audio src={Bell} ref="Bell" />
         <audio src={Triumph} ref="Triumph" />
         <audio src={LevelUp} ref="LevelUp" />

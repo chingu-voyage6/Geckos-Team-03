@@ -7,9 +7,23 @@ import './css/view.css';
 
 class View extends Component {
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.refs.container.style.maxHeight = '999px';
+      this.refs.container.style.opacity = 1
+    }, 0);
+  }
+
+  componentWillUnmount() {
+    this.refs.container.style.maxHeight = 0;
+    this.refs.container.style.opacity = 0;
+
+  }
+
   render() {
     return (
-    <div className="pomodoro-container">
+    <div ref='container' className="pomodoro-container">
+    <div className='tool-close' data-id={this.props.thisTool.id} onClick={this.props.onDeleteTool}>✕</div>
       <ButtonProgress 
         changeState={this.props.changeState}
         styles={this.props.styles}
@@ -52,6 +66,7 @@ class View extends Component {
 
 
       </div>
+      
     </div>
   )}
 }
