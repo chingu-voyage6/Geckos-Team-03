@@ -202,12 +202,27 @@ h3.btn-add-project::before {
   color: var(--darkblue);
   position: relative;
   margin: 1em 0 1em 0;
+  opacity: 1;
+  transition: .6s;
+  /* overflow: hidden; */
 }
 
 .project-group h3 {
   border-bottom: 3px solid var(--lightgrey);
 }
 .project-group h3:hover {
+  cursor: pointer;
+}
+
+.project-group .project-delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  font-size: .8em;
+}
+
+.project-group .project-delete:hover {
   cursor: pointer;
 }
 
@@ -323,5 +338,3 @@ ul.project-tasks input:checked ~ .task-item {
 .mwidth-100 {
   max-width: 100%;
 }
-
-
