@@ -11,6 +11,10 @@
   border-bottom: 3px solid var(--darkblue);
   transition: .3s;
   position: relative;
+  max-height: 0;
+  overflow: hidden;
+  transition: .3s;
+  opacity: 0;
 }
 
 .pomodoro-details {

@@ -58,7 +58,6 @@ class Sidebar extends Component {
   render() { 
     return (
     <div className="sidebar">
-      <h2 className='sidebar-main-title'>{this.props.selectedTask ? this.props.selectedTask.name : 'Select a task'}</h2>
       {this.props.selectedTask && this.props.selectedTask.tools && this.props.selectedTask.tools.map(tool => <Pomodoro key={tool.id} thisTool={tool} onDeleteTool={this.props.onDeleteTool} />)}
       {/* And any other tools for this timer... */}
       {this.props.selectedTask &&
