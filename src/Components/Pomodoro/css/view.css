@@ -12,10 +12,6 @@
   transition: .3s;
 }
 
-.pomodoro:first-of-type {
-  margin-top:7em;
-}
-
 .pomodoro-details {
   display: flex;
   flex-direction: column;

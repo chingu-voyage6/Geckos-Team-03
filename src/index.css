@@ -32,6 +32,7 @@ body {
 .container {
   position: relative;
   height: 100%;
+  min-height: 100vh;
 }
 
 .header {
@@ -87,6 +88,7 @@ h1.header-title {
   width: 43%;
   position: relative;
   text-align: center;
+  padding-top: 5em;
 }
 
 .sidebar > *:not(.sidebar-main-title) {
@@ -121,16 +123,17 @@ h1.header-title {
   color: var(--darkblue);
   position: relative;
   display: inline-block;
-  padding: .1em;
-  padding-left: 1.5em;
+  margin: 2em 0;
+  background: #fff;
+  padding: .6em 1em;
 }
-.add-tool:before {
+/* .add-tool:before {
   content: '+ ';
   position: absolute;
   font-size: 1.2em;
   left: 0;
   top: -.2em;
-}
+} */
 .add-tool:hover {
   cursor: pointer;
   color: var(--babyblue);
@@ -188,6 +191,9 @@ h3.btn-add-project::before {
   font-size: 1.2em;
 }
 
+.task-item {
+  transition: .3s;
+}
 .task-item:hover {
   cursor: pointer;
 }
@@ -297,6 +303,7 @@ ul.project-tasks input:checked + .checkTask {
 
 ul.project-tasks input:checked ~ .task-item {
   text-decoration: line-through;
+  color: var(--grey);
 }
 
 
