@@ -130,6 +130,10 @@ class Pomodoro extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.setMouseDown);
     document.removeEventListener('mouseup', this.setMouseUp);
+
+    // helping ensure there are no memory leaks
+    let activeTimer = {...this.state.activeTimer};
+    clearInterval(activeTimer.intervalID);
   }
 
 
