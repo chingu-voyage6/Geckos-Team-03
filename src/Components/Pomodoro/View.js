@@ -10,6 +10,7 @@ class View extends Component {
   render() {
     return (
     <div className="pomodoro-container">
+    <div className='tool-close' data-id={this.props.thisTool.id} onClick={this.props.onDeleteTool}>✕</div>
       <ButtonProgress 
         changeState={this.props.changeState}
         styles={this.props.styles}
@@ -52,6 +53,7 @@ class View extends Component {
 
 
       </div>
+      
     </div>
   )}
 }
