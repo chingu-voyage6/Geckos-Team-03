@@ -123,9 +123,9 @@ h1.header-title {
   color: var(--darkblue);
   position: relative;
   display: inline-block;
-  margin: 1em;
+  margin: 1.5em;
   background: #fff;
-  padding: .6em 1em;
+  padding: .6em 6em;
 }
 /* .add-tool:before {
   content: '+ ';
@@ -206,6 +206,9 @@ h3.btn-add-project::before {
 
 .project-group h3 {
   border-bottom: 3px solid var(--lightgrey);
+}
+.project-group h3:hover {
+  cursor: pointer;
 }
 
 .project-group input.toggle-collapse {

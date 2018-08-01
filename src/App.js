@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Pomodoro from './Components/Pomodoro';
 
 class TaskInput extends Component {
+  componentDidMount() {
+    this.refs.input.focus();
+  }
   render() { return (
-      <input className='main-input' placeholder="What do you want to get done?" />
+      <input ref='input' className='main-input' autoFocus placeholder="What do you want to get done?" />
     )}
 }
 class AddProject extends Component {
@@ -22,8 +25,8 @@ class TaskList extends Component {
     {this.props.projects.map(project => {
       return (
         <div key={project.id} className='project-group'>
-        <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
-        <h3>
+        <input ref={`toggle-${project.id}`} type="checkbox" className='toggle-collapse' name='toggle-collapse' />
+        <h3 onClick={() => this.refs[`toggle-${project.id}`].checked = !this.refs[`toggle-${project.id}`].checked}>
           {project.name}
         </h3>
         <ul className='project-tasks'>
