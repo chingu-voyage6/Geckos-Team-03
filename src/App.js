@@ -8,7 +8,7 @@ class TaskInput extends Component {
       inputValue: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
+  } 
 
   componentDidMount() {
     this.refs.input.focus();
@@ -201,6 +201,13 @@ class App extends Component {
         },
         {
           name: 'Implement settings for global and each individual timer',
+          id: this.uuidv4(),
+          project: this.anotherId,
+          selected: false,
+          tools: [],
+        },
+        {
+          name: 'Added another task',
           id: this.uuidv4(),
           project: this.anotherId,
           selected: false,
