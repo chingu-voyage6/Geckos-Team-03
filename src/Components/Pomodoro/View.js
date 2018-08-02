@@ -9,21 +9,24 @@ class View extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      this.refs.container.style.maxHeight = '999px';
-      this.refs.container.style.opacity = 1
+      this.refs.container.style.maxHeight = '14em';
+      this.refs.container.style.opacity = 1;
+      this.refs.container.style.margin = '2em 0';
+      this.refs.container.style.padding = '1em .5em';
+      
     }, 0);
-  }
-
-  componentWillUnmount() {
-    this.refs.container.style.maxHeight = 0;
-    this.refs.container.style.opacity = 0;
-
   }
 
   render() {
     return (
     <div ref='container' className="pomodoro-container">
-    <div className='tool-close' data-id={this.props.thisTool.id} onClick={this.props.onDeleteTool}>✕</div>
+    <div className='tool-close' data-id={this.props.thisTool.id} onClick={() => {
+      this.refs.container.style.maxHeight = 0;
+      this.refs.container.style.opacity = 0;
+      this.refs.container.style.margin = 0;
+      this.refs.container.style.padding = '0 .5em';
+      setTimeout(() => this.props.onDeleteTool(this.props.thisTool.id), 500)
+    }}>✕</div>
       <ButtonProgress 
         changeState={this.props.changeState}
         styles={this.props.styles}

@@ -258,12 +258,12 @@ class App extends Component {
     this.setState({ tasks });
   }
 
-  handleDeleteTool(e) {
+  handleDeleteTool(toolId) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
       if (task.selected) {
         task.tools.forEach(tool => {
-          if (tool.id === e.target.dataset.id) {
+          if (tool.id === toolId) {
             const index = task.tools.indexOf(tool);
             task.tools.splice(index, 1);
           }

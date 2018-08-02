@@ -5,15 +5,14 @@
   align-items: center;
   flex-wrap: wrap;
 
-  margin: 2em 0;
-  padding: 1em .5em;
+  margin: 0 0;
+  padding: 0 .5em;
   background: #fff;
   border-bottom: 3px solid var(--darkblue);
-  transition: .3s;
   position: relative;
   max-height: 0;
   overflow: hidden;
-  transition: .3s;
+  transition: .5s;
   opacity: 0;
 }
 
