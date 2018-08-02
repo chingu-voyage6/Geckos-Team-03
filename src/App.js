@@ -147,6 +147,7 @@ class Sidebar extends Component {
   render() { 
     return (
     <div className="sidebar">
+      {!this.props.selectedTask && <h3 className='side-info'>Click a task to reveal tools</h3>}
       {this.props.selectedTask && this.props.selectedTask.tools && this.props.selectedTask.tools.map(tool => <Pomodoro key={tool.id} thisTool={tool} onDeleteTool={this.props.onDeleteTool} />)}
       {/* And any other tools for this timer... */}
       {this.props.selectedTask &&
@@ -258,12 +259,12 @@ class App extends Component {
     this.setState({ tasks });
   }
 
-  handleDeleteTool(e) {
+  handleDeleteTool(toolId) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
       if (task.selected) {
         task.tools.forEach(tool => {
-          if (tool.id === e.target.dataset.id) {
+          if (tool.id === toolId) {
             const index = task.tools.indexOf(tool);
             task.tools.splice(index, 1);
           }
