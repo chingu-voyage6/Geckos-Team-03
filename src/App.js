@@ -32,7 +32,6 @@ class AddProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: false,
       inputValue: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -44,14 +43,12 @@ class AddProject extends Component {
 
   render() { return (
     <div>
-      <h3 onClick={() => this.setState({ input: true })} className='btn-add-project'>Add Project</h3>
-      { this.state.input && 
       <form onSubmit={e => {
         this.props.onAddProject(e, this.state.inputValue);
         this.setState({ inputValue: '' });
       }}>
-        <input value={this.state.inputValue} onChange={ this.handleInputChange } />
-      </form> }
+        <div className='btn-add-project-contain'><input className='btn-add-project' placeholder='Add Project' value={this.state.inputValue} onChange={ this.handleInputChange } /></div>
+      </form>
     </div>
   )}
 }
@@ -59,35 +56,46 @@ class AddProject extends Component {
 // to split into sub-components...
 class TaskList extends Component {
   
-  render() { 
+  render() {
+    this.unsortedTasks = false;
+    console.log('rerender!');
+    this.props.tasks.forEach(task => {
+      if (task.project === '') this.unsortedTasks = true;
+    });
     return (
     <div>
     
 
-    <div className='project-group'>
-        <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
-        <h3>
-          Unsorted tasks
-        </h3>
-      <ul className='project-tasks'>
 
-        {this.props.tasks.map(task => {
-          if (task.project === '') { 
-            return (
-            <li key={task.id}>
-              <input type="checkbox" /> <span className="checkTask" />
-              <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
-                {task.name}
-              </span>
-              {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
-            </li>
-          )} else {
-            return '';
-          }
-        })}
-      </ul>
+      {this.unsortedTasks &&
+        <div className='project-group'>
+            <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
+            <h3>
+              Unsorted tasks
+            </h3>
+        <ul className='project-tasks'>
 
+          {this.props.tasks.map(task => {
+            if (task.project === '') { 
+              return (
+              <li key={task.id}>
+                <input type="checkbox" /> <span className="checkTask" />
+                <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
+                  {task.name}
+                </span>
+
+                <div className='delete-button' onClick={() => this.props.onDeleteTask(task.id)}>✕</div>
+
+                {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
+              </li>
+            )} else {
+              return '';
+            }
+          })}
+
+        </ul>
       </div>
+      }
 
     {this.props.projects.map(project => {
       return (
@@ -96,14 +104,14 @@ class TaskList extends Component {
         <h3 onClick={() => this.refs[`toggle-${project.id}`].checked = !this.refs[`toggle-${project.id}`].checked}>
           {project.name}
         </h3>
-        <div className='project-delete' onClick={() => {
-            setTimeout(() => {
-              this.refs[project.id].style.opacity = 0;
-              this.refs[project.id].style.maxHeight = 0;
-              
-            }, 0);
-            setTimeout(() => this.props.onDeleteProject(project.id), 600);
-          }}>delete</div>
+        <div className='delete-button' onClick={() => {
+          this.refs[project.id].style.maxHeight = 0;
+          this.refs[project.id].style.margin = '0 0 0 -1em';
+          this.refs[project.id].style.opacity = 0;
+
+            
+          setTimeout(() => this.props.onDeleteProject(project.id), 500);
+          }}>✕</div>
         <ul className='project-tasks'>
           {this.props.tasks.map(task => {
             if (task.project === project.id) { 
@@ -113,6 +121,9 @@ class TaskList extends Component {
                 <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
                   {task.name}
                 </span>
+
+                <div className='delete-button' onClick={() => this.props.onDeleteTask(task.id)}>✕</div>
+
                 {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
               </li>
             )} else {
@@ -222,7 +233,7 @@ class App extends Component {
     this.handleAddProject = this.handleAddProject.bind(this);
     this.handleDeleteProject = this.handleDeleteProject.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
-
+    this.handleDeleteTask = this.handleDeleteTask.bind(this);
   }
 
   handleSelectTask(e) {
@@ -284,6 +295,14 @@ class App extends Component {
     this.setState({ projects });
   }
 
+  handleDeleteTask(taskId) {
+    const tasks = [...this.state.tasks];
+    const selectedTask = tasks.filter(task => task.id === taskId);
+    const index = tasks.indexOf(selectedTask[0]);
+    tasks.splice(index, 1);
+    this.setState({ tasks });
+  }
+
   handleAddTask(e, taskName) {
     e.preventDefault();
     if (taskName === "") {
@@ -314,7 +333,7 @@ class App extends Component {
 
             <TaskInput onAddTask={this.handleAddTask} />
             <AddProject onAddProject={this.handleAddProject} />
-            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} />
+            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask}/>
 
           </div>
 
