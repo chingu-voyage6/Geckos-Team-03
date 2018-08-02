@@ -333,8 +333,8 @@ class App extends Component {
           <div className="main-content">
 
             <TaskInput onAddTask={this.handleAddTask} />
-            <AddProject onAddProject={this.handleAddProject} />
             <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask}/>
+            <AddProject onAddProject={this.handleAddProject} />
 
           </div>
 

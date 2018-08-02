@@ -4,6 +4,9 @@
   --babyblue: #70cce0;
   --lightblue: #eff5fc;
   --green: #62ba6c;
+
+  --lightgreen: #DBFBDF;
+
   --black: #272727;
   --grey: #93aec2;
 
@@ -43,11 +46,10 @@ body {
   position: relative;
 }
 
-
-
 .header-group {
   position: absolute;
   bottom: 20px;
+  right: 0;
 }
 
 .logo {
@@ -60,7 +62,7 @@ h1.header-title {
   line-height: 1;
   text-transform: lowercase;
   font-size: 3em;
-  color: var(--grey);
+  color: var(--babyblue);
   display: inline-block;
   margin: 0;
   padding: 0 .5em;
@@ -72,7 +74,7 @@ h1.header-title {
   border-top: 24px solid var(--grey);
   width: 80%;
   max-width: 1020px;
-  margin: 0 auto 125px auto;
+  margin: 0 auto 13em auto;
   background: #fff;
   box-shadow: 0 36px 51px rgba(0,0,0,0.1);
   display: flex;
@@ -85,7 +87,7 @@ h1.header-title {
 
 .sidebar {
   background: var(--lightblue);
-  width: 43%;
+  width: 66%;
   position: relative;
   text-align: center;
   /* padding-top: 5em; */
@@ -142,7 +144,7 @@ h1.header-title {
   height: 2em;
   border: none;
   font-size: 1.35em;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   border-bottom: 3px solid var(--darkblue);
   padding: .5em;
 }
@@ -171,11 +173,24 @@ input.btn-add-project {
   border: none;
   width: 100%;
   border-bottom: 3px solid #fff;
+
+  background: var(--lightgreen);
+  color: var(--darkblue);
+  border-radius: 6px;
+  padding: .5em;
+  text-align: center;
+  transition: .3s;
+}
+
+input.btn-add-project:hover {
+  background: var(--green);
 }
 
 input.btn-add-project:focus {
   outline: none;
   border-bottom: 3px solid var(--green);
+  border-radius: 0;
+  background: transparent;
 }
 
 /* https://www.w3schools.com/howto/howto_css_placeholder.asp */
@@ -184,6 +199,9 @@ input.btn-add-project::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   font-size: 1em;
   color: var(--green);
   opacity: 1; /* Firefox */
+}
+input.btn-add-project:hover::placeholder {
+  color: #fff;
 }
 input.btn-add-project:-ms-input-placeholder { /* Internet Explorer 10-11 */
   font-weight: 400;
@@ -203,14 +221,6 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 .btn-add-project-contain {
   position: relative;
 }
-.btn-add-project-contain::before {
-  content: '+';
-  position: absolute;
-  left: -.8em;
-  top: .4em;
-  color: var(--black);
-  font-size: 1.2em;
-}
 
 .task-item {
   transition: .3s;
@@ -222,7 +232,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 .project-group {
   color: var(--darkblue);
   position: relative;
-  margin: 1em 0 0 -1em;
+  margin: 0 0 0 -1em;
   padding-left: 1em;
   opacity: 1;
   transform: translate(0,0);
