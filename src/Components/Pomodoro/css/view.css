@@ -16,6 +16,13 @@
   opacity: 0;
 }
 
+.pomodoro-container .delete-button {
+  font-size: 1.2em;
+  opacity: .85;
+  right: .4em;
+  top: .4em;
+}
+
 .pomodoro-details {
   display: flex;
   flex-direction: column;

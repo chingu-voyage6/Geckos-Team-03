@@ -49,7 +49,7 @@ body {
 .header-group {
   position: absolute;
   bottom: 20px;
-  right: 0;
+  /* right: 0; */
 }
 
 .logo {
@@ -167,9 +167,6 @@ input.btn-add-project {
   padding-left: .5rem;
   margin: 1em 0;
 
-  color: var(--darkblue);
-  position: relative;
-  padding-bottom: .5em;
   border: none;
   width: 100%;
   border-bottom: 3px solid #fff;
@@ -200,7 +197,8 @@ input.btn-add-project::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--green);
   opacity: 1; /* Firefox */
 }
-input.btn-add-project:hover::placeholder {
+input.btn-add-project:hover::placeholder,
+input.btn-add-project:focus::placeholder {
   color: #fff;
 }
 input.btn-add-project:-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -248,7 +246,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   cursor: pointer;
 }
 
-.project-group .delete-button {
+.delete-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -267,7 +265,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   transition: .3s;
 }
 
-.project-group .delete-button:hover {
+.delete-button:hover {
   color: red;
   cursor: pointer;
   opacity: 0.85;

@@ -20,7 +20,7 @@ class View extends Component {
   render() {
     return (
     <div ref='container' className="pomodoro-container">
-    <div className='tool-close' data-id={this.props.thisTool.id} onClick={() => {
+    <div className='delete-button' data-id={this.props.thisTool.id} onClick={() => {
       this.refs.container.style.maxHeight = 0;
       this.refs.container.style.opacity = 0;
       this.refs.container.style.margin = 0;
