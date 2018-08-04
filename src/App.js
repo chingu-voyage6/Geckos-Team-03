@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pomodoro from './Components/Pomodoro';
+import Dragula from 'react-dragula';
 
 class TaskInput extends Component {
   constructor(props) {
@@ -94,6 +95,18 @@ class TaskList extends Component {
       this.refs[`${project.id}-list`].style.maxHeight = `${projectHeight - 2}rem`;
     })
   }
+
+  dragulaDecorator = () => {
+    const projects = [...this.props.projects];
+    const containers = [this.refs.unsortedTasksList];
+    projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
+    console.log(containers)
+
+    if (containers.length > 0) {
+      let options = { containers };
+      Dragula(options);
+    }
+  }
   
   render() {
 
@@ -102,7 +115,7 @@ class TaskList extends Component {
       if (task.project === '') this.unsortedTasks = true;
     });
     return (
-    <div>
+    <div ref={this.dragulaDecorator}>
 
       {this.unsortedTasks &&
         <div ref='unsortedTasksGroup' className='project-group'>
