@@ -35,19 +35,25 @@ class AddProject extends Component {
       inputValue: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleInputChange(e) {
     this.setState({ inputValue: e.target.value });
   }
 
+  handleBlur() {
+    this.setState({ inputValue: '' });
+  }
+
   render() { return (
     <div>
       <form onSubmit={e => {
         this.props.onAddProject(e, this.state.inputValue);
+        this.refs.projectInput.blur();
         this.setState({ inputValue: '' });
       }}>
-        <div className='btn-add-project-contain'><input className='btn-add-project' placeholder='Add Project' value={this.state.inputValue} onChange={ this.handleInputChange } /></div>
+        <div className='btn-add-project-contain'><input onBlur={this.handleBlur} ref='projectInput' className='btn-add-project' placeholder='Add Project' value={this.state.inputValue} onChange={ this.handleInputChange } /></div>
       </form>
     </div>
   )}
@@ -55,8 +61,34 @@ class AddProject extends Component {
 
 // to split into sub-components...
 class TaskList extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.setMaxHeights = this.setMaxHeights.bind(this);
+  }
+
+  componentDidMount() {
+    this.setMaxHeights();
+  }
+
+  componentDidUpdate() {
+    this.setMaxHeights();
+  }
+
+  setMaxHeights() {
+    if (this.unsortedTasks) {
+      let projectHeight = 92;
+      this.props.tasks.forEach(task => {
+        if (task.project === '') projectHeight += 28;
+      });
+      this.refs.unsortedTasks.style.maxHeight = `${projectHeight}px`;
+    }
+
+
+  }
   
   render() {
+
     this.unsortedTasks = false;
     console.log('rerender!');
     this.props.tasks.forEach(task => {
@@ -64,11 +96,9 @@ class TaskList extends Component {
     });
     return (
     <div>
-    
-
 
       {this.unsortedTasks &&
-        <div className='project-group'>
+        <div ref='unsortedTasks' className='project-group'>
             <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
             <h3>
               Unsorted tasks
