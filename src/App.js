@@ -77,20 +77,27 @@ class TaskList extends Component {
 
   setMaxHeights() {
     if (this.unsortedTasks) {
-      let projectHeight = 92;
+      let projectHeight = 5.1;
       this.props.tasks.forEach(task => {
-        if (task.project === '') projectHeight += 28;
+        if (task.project === '') projectHeight += 3.6;
       });
-      this.refs.unsortedTasks.style.maxHeight = `${projectHeight}px`;
+      this.refs.unsortedTasksGroup.style.maxHeight = `${projectHeight}rem`;
+      this.refs.unsortedTasksList.style.maxHeight = `${projectHeight - 2}rem`;
     }
 
-
+    this.props.projects.forEach(project => {
+      let projectHeight = 5.1;
+      this.props.tasks.forEach(task => {
+        if (task.project === project.id) projectHeight += 3.6;
+      });
+      this.refs[project.id].style.maxHeight = `${projectHeight}rem`;
+      this.refs[`${project.id}-list`].style.maxHeight = `${projectHeight - 2}rem`;
+    })
   }
   
   render() {
 
     this.unsortedTasks = false;
-    console.log('rerender!');
     this.props.tasks.forEach(task => {
       if (task.project === '') this.unsortedTasks = true;
     });
@@ -98,12 +105,12 @@ class TaskList extends Component {
     <div>
 
       {this.unsortedTasks &&
-        <div ref='unsortedTasks' className='project-group'>
+        <div ref='unsortedTasksGroup' className='project-group'>
             <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
             <h3>
               Unsorted tasks
             </h3>
-        <ul className='project-tasks'>
+        <ul ref='unsortedTasksList' className='project-tasks'>
 
           {this.props.tasks.map(task => {
             if (task.project === '') { 
@@ -142,7 +149,7 @@ class TaskList extends Component {
             
           setTimeout(() => this.props.onDeleteProject(project.id), 500);
           }}>✕</div>
-        <ul className='project-tasks'>
+        <ul ref={`${project.id}-list`} className='project-tasks'>
           {this.props.tasks.map(task => {
             if (task.project === project.id) { 
               return (
@@ -318,7 +325,6 @@ class App extends Component {
   }
 
   handleDeleteProject(projectId) {
-    console.log('deleting project');
     const projects = [...this.state.projects];
     const selectedProject = projects.filter(project => project.id === projectId);
     const index = projects.indexOf(selectedProject[0]);

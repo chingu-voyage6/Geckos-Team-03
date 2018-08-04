@@ -236,7 +236,6 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   transform: translate(0,0);
   transition: .5s;
   overflow: hidden;
-  max-height: 300px;
 }
 
 .project-group h3 {
@@ -313,7 +312,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 .project-group input.toggle-collapse:checked ~ ul {
-  max-height: 0;
+  max-height: 0 !important;
 }
 
 .project-group .options-icon {
@@ -330,7 +329,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   color: var(--black);
   transition: .6s;
   overflow: hidden;
-  max-height: 1000px;
+  /* max-height: 1000px; */
 }
 
 ul.project-tasks {
