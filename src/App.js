@@ -73,26 +73,32 @@ class TaskList extends Component {
   }
 
   componentDidUpdate() {
+    console.log('update');
     this.setMaxHeights();
+    
+    // const projects = [...this.props.projects];
+    // const containers = [this.refs.unsortedTasksList];
+    // projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
+    // this.dragulaDecorator.containers = containers;
+
+
   }
 
   setMaxHeights() {
-    if (this.unsortedTasks) {
-      let projectHeight = 5.1;
-      this.props.tasks.forEach(task => {
-        if (task.project === '') projectHeight += 3.6;
-      });
-      this.refs.unsortedTasksGroup.style.maxHeight = `${projectHeight}rem`;
-      this.refs.unsortedTasksList.style.maxHeight = `${projectHeight - 2}rem`;
+    if (this.refs.unsortedTasksGroup){
+      this.refs.unsortedTasksList.style.maxHeight = 
+          `${this.refs.unsortedTasksList.scrollHeight}px`;
+      this.refs.unsortedTasksGroup.style.maxHeight = 
+          `${this.refs.unsortedTasksList.scrollHeight + 70}px`;
+          // `${this.refs.unsortedTasksGroup.scrollHeight}px`;
     }
 
     this.props.projects.forEach(project => {
-      let projectHeight = 5.1;
-      this.props.tasks.forEach(task => {
-        if (task.project === project.id) projectHeight += 3.6;
-      });
-      this.refs[project.id].style.maxHeight = `${projectHeight}rem`;
-      this.refs[`${project.id}-list`].style.maxHeight = `${projectHeight - 2}rem`;
+      this.refs[`${project.id}-list`].style.maxHeight = 
+          `${this.refs[`${project.id}-list`].scrollHeight}px`;
+      this.refs[project.id].style.maxHeight = 
+          `${this.refs[`${project.id}-list`].scrollHeight + 70}px`;
+          // `${this.refs[project.id].scrollHeight}px`;
     })
   }
 
@@ -100,11 +106,26 @@ class TaskList extends Component {
     const projects = [...this.props.projects];
     const containers = [this.refs.unsortedTasksList];
     projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
-    console.log(containers)
+    console.log(containers);
 
     if (containers.length > 0) {
       let options = { containers };
-      Dragula(options);
+      Dragula(options)
+        .on('drag', () => {
+          this.setMaxHeights();
+        })
+        .on('drop', () => {
+          this.setMaxHeights();
+        })
+        .on('over', () => {
+          this.setMaxHeights();
+        })
+        .on('shadow', () => {
+          this.setMaxHeights();
+        })
+        .on('out', () => {
+          this.setMaxHeights();
+        });
     }
   }
   
@@ -117,7 +138,6 @@ class TaskList extends Component {
     return (
     <div ref={this.dragulaDecorator}>
 
-      {this.unsortedTasks &&
         <div ref='unsortedTasksGroup' className='project-group'>
             <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
             <h3>
@@ -134,7 +154,10 @@ class TaskList extends Component {
                   {task.name}
                 </span>
 
-                <div className='delete-button' onClick={() => this.props.onDeleteTask(task.id)}>✕</div>
+                <div className='delete-button' onClick={e => {
+                  //animation to  go here
+                  this.props.onDeleteTask(task.id)
+                }}>✕</div>
 
                 {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
               </li>
@@ -145,7 +168,6 @@ class TaskList extends Component {
 
         </ul>
       </div>
-      }
 
     {this.props.projects.map(project => {
       return (
@@ -158,7 +180,6 @@ class TaskList extends Component {
           this.refs[project.id].style.maxHeight = 0;
           this.refs[project.id].style.margin = '0 0 0 -1em';
           this.refs[project.id].style.opacity = 0;
-
             
           setTimeout(() => this.props.onDeleteProject(project.id), 500);
           }}>✕</div>
@@ -297,7 +318,7 @@ class App extends Component {
     this.setState({ tasks });
   }
 
-  // for now it can just add a pomdoro component
+  // for now it can just add a pomodoro component
   handleAddTool(taskID) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {

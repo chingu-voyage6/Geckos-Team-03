@@ -314,6 +314,8 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 
 .project-group input.toggle-collapse:checked ~ ul {
   max-height: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .project-group .options-icon {
@@ -330,13 +332,13 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   color: var(--black);
   transition: .6s;
   overflow: hidden;
+  list-style: none;
+  padding-top: .5em;
+  padding-bottom: .5em
 }
 
-ul.project-tasks {
-  list-style: none;
-}
 ul.project-tasks li {
-  margin-bottom: 1.8em;
+  padding-bottom: 1.2em;
   font-size: 0.9em;
   position: relative;
 }
