@@ -227,6 +227,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   cursor: pointer;
 }
 
+
 .project-group {
   color: var(--darkblue);
   position: relative;
@@ -329,7 +330,6 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   color: var(--black);
   transition: .6s;
   overflow: hidden;
-  /* max-height: 1000px; */
 }
 
 ul.project-tasks {
@@ -386,6 +386,38 @@ ul.project-tasks input:checked ~ .task-item {
   bottom: -.3em;
   transition: .3s;
   max-width: 0;
+}
+
+/* =========================================== */
+/* DRAGULA STYLES */
+/* =========================================== */
+
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  font-size: .9em;
+  opacity: 0.8;
+  list-style-type: none;
+}
+
+.gu-mirror input {
+  display: none;
+  list-style: none;
+  margin-left: 0;
+}
+
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
 }
 
 .mwidth-100 {
