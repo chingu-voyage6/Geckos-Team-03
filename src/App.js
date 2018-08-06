@@ -64,10 +64,9 @@ class AddProject extends Component {
 class TaskList extends Component {
   constructor(props) {
     super(props);
-    
     this.setMaxHeights = this.setMaxHeights.bind(this);
   }
-
+  
   componentDidMount() {
     this.setMaxHeights();
   }
@@ -106,7 +105,6 @@ class TaskList extends Component {
     const projects = [...this.props.projects];
     const containers = [this.refs.unsortedTasksList];
     projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
-    console.log(containers);
 
     if (containers.length > 0) {
       let options = { containers };
@@ -114,8 +112,16 @@ class TaskList extends Component {
         .on('drag', () => {
           this.setMaxHeights();
         })
-        .on('drop', () => {
+        .on('drop', (el) => {
           this.setMaxHeights();
+          if (!el) return;
+          const taskId = el.dataset.id;
+          let projectId;
+          el.dataset.id === 'unsortedTasksList' 
+            ? projectId = '' 
+            : projectId = el.parentNode.dataset.id;
+
+          this.props.onMoveTask(taskId, projectId);
         })
         .on('over', () => {
           this.setMaxHeights();
@@ -131,10 +137,6 @@ class TaskList extends Component {
   
   render() {
 
-    this.unsortedTasks = false;
-    this.props.tasks.forEach(task => {
-      if (task.project === '') this.unsortedTasks = true;
-    });
     return (
     <div ref={this.dragulaDecorator}>
 
@@ -143,12 +145,12 @@ class TaskList extends Component {
             <h3>
               Unsorted tasks
             </h3>
-        <ul ref='unsortedTasksList' className='project-tasks'>
+        <ul ref='unsortedTasksList' data-id='unsortedTasksList' className='project-tasks'>
 
           {this.props.tasks.map(task => {
             if (task.project === '') { 
               return (
-              <li key={task.id}>
+              <li key={task.id} data-id={task.id}>
                 <input type="checkbox" /> <span className="checkTask" />
                 <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
                   {task.name}
@@ -181,13 +183,13 @@ class TaskList extends Component {
           this.refs[project.id].style.margin = '0 0 0 -1em';
           this.refs[project.id].style.opacity = 0;
             
-          setTimeout(() => this.props.onDeleteProject(project.id), 500);
+          setTimeout(() => this.props.onDeleteProject(project.id), 300);
           }}>✕</div>
-        <ul ref={`${project.id}-list`} className='project-tasks'>
+        <ul ref={`${project.id}-list`} data-id={project.id} className='project-tasks'>
           {this.props.tasks.map(task => {
             if (task.project === project.id) { 
               return (
-              <li key={task.id}>
+              <li key={task.id} data-id={task.id}>
                 <input type="checkbox" /> <span className="checkTask" />
                 <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
                   {task.name}
@@ -222,7 +224,7 @@ class Sidebar extends Component {
       {this.props.selectedTask && this.props.selectedTask.tools && this.props.selectedTask.tools.map(tool => <Pomodoro key={tool.id} thisTool={tool} onDeleteTool={this.props.onDeleteTool} />)}
       {/* And any other tools for this timer... */}
       {this.props.selectedTask &&
-        (<h3 onClick={() => this.props.onAddTool(this.props.selectedTask.id)} className='add-tool'>+ Add Tool</h3>)
+        (<div onClick={() => this.props.onAddTool(this.props.selectedTask.id)} className='btn-add-tool'>Add Tool</div>)
       }
 
     </div>
@@ -306,6 +308,7 @@ class App extends Component {
     this.handleDeleteProject = this.handleDeleteProject.bind(this);
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
+    this.handleMoveTask = this.handleMoveTask.bind(this);
   }
 
   handleSelectTask(e) {
@@ -380,7 +383,8 @@ class App extends Component {
       return;
     }
     const tasks = [...this.state.tasks];
-    tasks.push({
+    // add a task to the top of the array
+    tasks.unshift({
       name: taskName,
       id: this.uuidv4(),
       project: '',
@@ -388,6 +392,15 @@ class App extends Component {
       tools: [],
     });
     this.setState({ tasks });
+  }
+
+  // want to get this working, so that *project lists* reflect *state*
+  handleMoveTask(taskId, projectId) {
+    const tasks = [...this.state.tasks];
+    tasks.forEach(task => {
+      if (task.id === taskId) task.project = projectId;
+    });
+    // this.setState({ tasks });
   }
 
   render() {
@@ -403,13 +416,13 @@ class App extends Component {
           <div className="main-content">
 
             <TaskInput onAddTask={this.handleAddTask} />
-            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask}/>
+            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask}/>
             <AddProject onAddProject={this.handleAddProject} />
 
           </div>
 
           {/* sidebar get passed whichever task is selected as a prop */}
-          <Sidebar selectedTask={this.state.tasks.filter(task => task.selected)[0]} onAddTool={this.handleAddTool} onDeleteTool={this.handleDeleteTool} />
+          <Sidebar selectedTask={this.state.tasks.filter(task => task.selected)[0]} onAddTool={this.handleAddTool} onDeleteTool={this.handleDeleteTool}/>
 
         </div>
         <div className="footer"></div>
