@@ -90,16 +90,7 @@ h1.header-title {
   width: 66%;
   position: relative;
   text-align: center;
-  /* padding-top: 5em; */
-}
-
-.sidebar > *:not(.sidebar-main-title) {
   transition: .3s;
-  opacity: .9;
-}
-
-.sidebar > *:hover {
-  opacity: 1;
 }
 
 .sidebar h3.side-info {
@@ -108,13 +99,28 @@ h1.header-title {
   color: var(--grey);
 }
 
-.add-tool {
-  color: var(--darkblue);
-  position: relative;
-  display: inline-block;
-  margin: 1.5em;
+.btn-add-tool {
+  font-weight: 400;
+  font-size: 1em;
+  padding-left: .5rem;
+  margin: 2em auto;
+  line-height: 1em;
+
+  border: none;
+  width: 85%;
+  border-bottom: 3px solid rgba(0,0,0,0);
+
   background: #fff;
-  padding: .6em 6em;
+  color: var(--darkblue);
+  border-radius: 6px;
+  padding: .6em;
+  text-align: center;
+  transition: .3s;
+}
+.btn-add-tool:hover {
+  cursor: pointer;
+  background: var(--grey);
+  color: #fff;
 }
 /* .add-tool:before {
   content: '+ ';
@@ -123,11 +129,6 @@ h1.header-title {
   left: 0;
   top: -.2em;
 } */
-.add-tool:hover {
-  cursor: pointer;
-  color: var(--babyblue);
-  border-bottom: 3px solid var(--babyblue);
-}
 
 .footer {
   background: url(images/bg-bottom-right.svg) bottom right / 80% no-repeat;
@@ -235,7 +236,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   padding-left: 1em;
   opacity: 1;
   transform: translate(0,0);
-  transition: .5s;
+  transition: .3s;
   overflow: hidden;
 }
 
@@ -314,6 +315,8 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 
 .project-group input.toggle-collapse:checked ~ ul {
   max-height: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .project-group .options-icon {
@@ -328,15 +331,15 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
 
 .project-group ul {
   color: var(--black);
-  transition: .6s;
+  transition: .3s;
   overflow: hidden;
+  list-style: none;
+  padding-top: .5em;
+  padding-bottom: .5em
 }
 
-ul.project-tasks {
-  list-style: none;
-}
 ul.project-tasks li {
-  margin-bottom: 1.8em;
+  margin-bottom: 1.2em;
   font-size: 0.9em;
   position: relative;
 }
@@ -407,6 +410,10 @@ ul.project-tasks input:checked ~ .task-item {
   margin-left: 0;
 }
 
+.gu-mirror:hover {
+  cursor: move;
+}
+
 .gu-hide {
   display: none !important;
 }
@@ -419,6 +426,8 @@ ul.project-tasks input:checked ~ .task-item {
 .gu-transit {
   opacity: 0.2;
 }
+
+
 
 .mwidth-100 {
   max-width: 100%;
