@@ -256,6 +256,7 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   transform: translate(0,0);
   transition: .3s;
   overflow: hidden;
+  max-height: 0;
 }
 
 .project-group h3 {
@@ -284,13 +285,50 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   transition: .3s;
 }
 
+.project-group h3 ~ .delete-button {
+  opacity: .4;
+}
+
 .delete-button:hover {
   color: red;
   cursor: pointer;
   opacity: 0.85;
 }
 
-.project-group h3:hover + .delete-button {
+.project-add-task-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  right: 2em;
+  color: var(--black);
+  font-size: 1.1em;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0;
+  opacity: 1;
+  border-radius: 100%;
+  background: #fff;
+  transition: .3s;
+  transform: rotate(45deg);
+  opacity: 0.4;
+}
+
+.project-add-task-button:hover {
+  cursor: pointer;
+  color: var(--green);
+  opacity: 1;
+}
+
+.project-group h3:hover ~ .project-add-task-button {
+  opacity: 1;
+}
+
+
+
+.project-group h3:hover ~ .delete-button {
   opacity: 1;
 }
 
@@ -353,13 +391,15 @@ input.btn-add-project::-ms-input-placeholder { /* Microsoft Edge */
   overflow: hidden;
   list-style: none;
   padding-top: .5em;
-  padding-bottom: .5em
+  padding-bottom: .5em;
 }
 
 ul.project-tasks li {
   margin-bottom: 1.2em;
   font-size: 0.9em;
   position: relative;
+  transition: .3s;
+  opacity: 1;
 }
 
 ul.project-tasks input {
@@ -407,6 +447,32 @@ ul.project-tasks input:checked ~ .task-item {
   bottom: -.3em;
   transition: .3s;
   max-width: 0;
+}
+
+.project-group form {
+  margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: .3s;
+}
+input.project-add-task {
+  margin: 0;
+  margin: 1em;
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 100%;
+  border: none;
+  font-size: 1em;
+  border-bottom: 3px solid #fff;
+  padding: .3em .5em;
+  background: var(--lightgrey);
+}
+
+input.project-add-task:focus {
+  outline: none;
+  border-bottom: 3px solid var(--babyblue);
+  background: #fff;
+  border-radius: 0;
 }
 
 /* =========================================== */

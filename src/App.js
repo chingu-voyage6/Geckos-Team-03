@@ -72,15 +72,7 @@ class TaskList extends Component {
   }
 
   componentDidUpdate() {
-    console.log('update');
     this.setMaxHeights();
-    
-    // const projects = [...this.props.projects];
-    // const containers = [this.refs.unsortedTasksList];
-    // projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
-    // this.dragulaDecorator.containers = containers;
-
-
   }
 
   setMaxHeights() {
@@ -89,6 +81,7 @@ class TaskList extends Component {
           `${this.refs.unsortedTasksList.scrollHeight}px`;
       this.refs.unsortedTasksGroup.style.maxHeight = 
           `${this.refs.unsortedTasksList.scrollHeight + 70}px`;
+          // this does not work, it doesn't compute the actual value - so just add 70px
           // `${this.refs.unsortedTasksGroup.scrollHeight}px`;
     }
 
@@ -96,7 +89,7 @@ class TaskList extends Component {
       this.refs[`${project.id}-list`].style.maxHeight = 
           `${this.refs[`${project.id}-list`].scrollHeight}px`;
       this.refs[project.id].style.maxHeight = 
-          `${this.refs[`${project.id}-list`].scrollHeight + 70}px`;
+          `${this.refs[`${project.id}-list`].scrollHeight + 120}px`;
           // `${this.refs[project.id].scrollHeight}px`;
     })
   }
@@ -150,15 +143,17 @@ class TaskList extends Component {
           {this.props.tasks.map(task => {
             if (task.project === '') { 
               return (
-              <li key={task.id} data-id={task.id}>
+              <li ref={task.id} key={task.id} data-id={task.id}>
                 <input type="checkbox" /> <span className="checkTask" />
                 <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
                   {task.name}
                 </span>
 
-                <div className='delete-button' onClick={e => {
-                  //animation to  go here
-                  this.props.onDeleteTask(task.id)
+                {/* <div className='drag-button'><i class="fas fa-grip-vertical"></i></div> */}
+
+                <div className='delete-button' onClick={() => {
+                  this.refs[task.id].style.opacity = 0;
+                  setTimeout(() => this.props.onDeleteTask(task.id), 300);
                 }}>✕</div>
 
                 {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
@@ -178,6 +173,14 @@ class TaskList extends Component {
         <h3 onClick={() => this.refs[`toggle-${project.id}`].checked = !this.refs[`toggle-${project.id}`].checked}>
           {project.name}
         </h3>
+
+        <div className='project-add-task-button' onClick={() => {
+          this.refs[`${project.id}-form`].style.maxHeight = this.refs[`${project.id}-list`].scrollHeight + 'px';
+          this.refs[`${project.id}-form`].querySelector('input').focus();
+        }}>
+          ✕
+        </div>
+
         <div className='delete-button' onClick={() => {
           this.refs[project.id].style.maxHeight = 0;
           this.refs[project.id].style.margin = '0 0 0 -1em';
@@ -185,17 +188,23 @@ class TaskList extends Component {
             
           setTimeout(() => this.props.onDeleteProject(project.id), 300);
           }}>✕</div>
+
+          <form ref={`${project.id}-form`}><input type="text" className='project-add-task' placeholder="Enter a task name" /></form>
+
         <ul ref={`${project.id}-list`} data-id={project.id} className='project-tasks'>
           {this.props.tasks.map(task => {
             if (task.project === project.id) { 
               return (
-              <li key={task.id} data-id={task.id}>
+              <li ref={task.id} key={task.id} data-id={task.id}>
                 <input type="checkbox" /> <span className="checkTask" />
                 <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
                   {task.name}
                 </span>
 
-                <div className='delete-button' onClick={() => this.props.onDeleteTask(task.id)}>✕</div>
+                <div className='delete-button' onClick={() => {
+                  this.refs[task.id].style.opacity = 0;
+                  setTimeout(() => this.props.onDeleteTask(task.id), 300);
+                }}>✕</div>
 
                 {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
               </li>
@@ -315,6 +324,7 @@ class App extends Component {
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.handleMoveTask = this.handleMoveTask.bind(this);
+    this.handleProjectAddTask = this.handleProjectAddTask.bind(this);
   }
 
   handleSelectTask(e) {
@@ -372,7 +382,16 @@ class App extends Component {
     const selectedProject = projects.filter(project => project.id === projectId);
     const index = projects.indexOf(selectedProject[0]);
     projects.splice(index, 1);
-    this.setState({ projects });
+
+    const tasks = [...this.state.tasks];
+    tasks.forEach(task => {
+      if (task.project === projectId) {
+        const taskIndex = tasks.indexOf(task);
+        tasks.splice(taskIndex, 1);
+      }
+    });
+
+    this.setState({ projects, tasks });
   }
 
   handleDeleteTask(taskId) {
@@ -409,6 +428,10 @@ class App extends Component {
     // this.setState({ tasks });
   }
 
+  handleProjectAddTask(projectId) {
+    this.setState({ projectAddTask: projectId});
+  }
+
   render() {
     return (
       <div className="container">
@@ -422,7 +445,7 @@ class App extends Component {
           <div className="main-content">
 
             <TaskInput onAddTask={this.handleAddTask} />
-            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask}/>
+            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask} onProjectAddTask={this.handleProjectAddTask}/>
             <AddProject onAddProject={this.handleAddProject} />
 
           </div>
