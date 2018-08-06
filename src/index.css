@@ -19,8 +19,8 @@
 }
 html {
   height: 100%;
-  background: url(images/bg-top-left.svg) top left / 50% no-repeat;
-  background-color: var(--lightgrey);
+  background: url(images/bg-top-left.svg) top left / 55% no-repeat;
+  background-color: #DEE8EA;
 }
 body {
   margin: 0;
@@ -62,12 +62,20 @@ h1.header-title {
   line-height: 1;
   text-transform: lowercase;
   font-size: 3em;
-  color: var(--babyblue);
+  color: var(--grey);
   display: inline-block;
   margin: 0;
   padding: 0 .5em;
   font-weight: 200;
   letter-spacing: 0.1em;
+  transition: color .3s;
+}
+
+.header-group:hover {
+  cursor: pointer;
+}
+.header-group:hover h1.header-title {
+  color: var(--babyblue);
 }
 
 .app {
@@ -91,6 +99,10 @@ h1.header-title {
   position: relative;
   text-align: center;
   transition: .3s;
+}
+
+.sidebar-content {
+  transition: .1s;
 }
 
 .sidebar h3.side-info {
@@ -142,17 +154,23 @@ h1.header-title {
 
 .main-input {
   width: 100%;
-  height: 2em;
+  /* height: 2em; */
   border: none;
-  font-size: 1.35em;
-  margin-bottom: 2em;
-  border-bottom: 3px solid var(--darkblue);
-  padding: .5em;
+  font-size: 1.2em;
+  margin-bottom: 2.2em;
+  border-bottom: 3px solid #fff;
+  padding: .5em 1em;
+  background: var(--lightgrey);
+  transition: .3s;
+  border-radius: 6px;
+  text-align: center;
 }
 
 .main-input:focus {
   outline: none;
   border-bottom: 3px solid var(--babyblue);
+  background: #fff;
+  border-radius: 0;
 }
 
 h3 {
