@@ -64,7 +64,11 @@ class AddProject extends Component {
 class TaskList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      projectAddTaskInput: '',
+    }
     this.setMaxHeights = this.setMaxHeights.bind(this);
+    this.handleProjectAddTaskChange = this.handleProjectAddTaskChange.bind(this);
   }
   
   componentDidMount() {
@@ -80,7 +84,7 @@ class TaskList extends Component {
       this.refs.unsortedTasksList.style.maxHeight = 
           `${this.refs.unsortedTasksList.scrollHeight}px`;
       this.refs.unsortedTasksGroup.style.maxHeight = 
-          `${this.refs.unsortedTasksList.scrollHeight + 70}px`;
+          `${this.refs.unsortedTasksList.scrollHeight + 120}px`;
           // this does not work, it doesn't compute the actual value - so just add 70px
           // `${this.refs.unsortedTasksGroup.scrollHeight}px`;
     }
@@ -126,6 +130,10 @@ class TaskList extends Component {
           this.setMaxHeights();
         });
     }
+  }
+
+  handleProjectAddTaskChange(e) {
+    this.setState({ projectAddTaskInput: e.target.value });
   }
   
   render() {
@@ -175,7 +183,8 @@ class TaskList extends Component {
         </h3>
 
         <div className='project-add-task-button' onClick={() => {
-          this.refs[`${project.id}-form`].style.maxHeight = this.refs[`${project.id}-list`].scrollHeight + 'px';
+          this.refs[`${project.id}-form`].style.maxHeight = this.refs[`${project.id}-form`].scrollHeight + 'px';
+          this.setMaxHeights();
           this.refs[`${project.id}-form`].querySelector('input').focus();
         }}>
           ✕
@@ -189,7 +198,12 @@ class TaskList extends Component {
           setTimeout(() => this.props.onDeleteProject(project.id), 300);
           }}>✕</div>
 
-          <form ref={`${project.id}-form`}><input type="text" className='project-add-task' placeholder="Enter a task name" /></form>
+          <form ref={`${project.id}-form`} onSubmit={(e) => {
+            this.props.onProjectAddTask(e, this.state.projectAddTaskInput, project.id);
+            this.setState({ projectAddTaskInput: '' });
+          }}><input value={this.state.projectAddTaskInput} onChange={this.handleProjectAddTaskChange} 
+            onBlur={() => this.refs[`${project.id}-form`].style.maxHeight = 0} 
+            type="text" className='project-add-task' placeholder="Enter a task name" /></form>
 
         <ul ref={`${project.id}-list`} data-id={project.id} className='project-tasks'>
           {this.props.tasks.map(task => {
@@ -324,7 +338,6 @@ class App extends Component {
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.handleMoveTask = this.handleMoveTask.bind(this);
-    this.handleProjectAddTask = this.handleProjectAddTask.bind(this);
   }
 
   handleSelectTask(e) {
@@ -402,7 +415,7 @@ class App extends Component {
     this.setState({ tasks });
   }
 
-  handleAddTask(e, taskName) {
+  handleAddTask(e, taskName, projectId = '') {
     e.preventDefault();
     if (taskName === "") {
       return;
@@ -412,7 +425,7 @@ class App extends Component {
     tasks.unshift({
       name: taskName,
       id: this.uuidv4(),
-      project: '',
+      project: projectId,
       selected: false,
       tools: [],
     });
@@ -428,10 +441,6 @@ class App extends Component {
     // this.setState({ tasks });
   }
 
-  handleProjectAddTask(projectId) {
-    this.setState({ projectAddTask: projectId});
-  }
-
   render() {
     return (
       <div className="container">
@@ -445,7 +454,7 @@ class App extends Component {
           <div className="main-content">
 
             <TaskInput onAddTask={this.handleAddTask} />
-            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask} onProjectAddTask={this.handleProjectAddTask}/>
+            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask} onProjectAddTask={this.handleAddTask}/>
             <AddProject onAddProject={this.handleAddProject} />
 
           </div>
