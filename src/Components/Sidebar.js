@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Pomodoro from './Pomodoro';
+import './css/sidebar.css';
 
 // sidebar to display tools for a selected timer
 class Sidebar extends Component {

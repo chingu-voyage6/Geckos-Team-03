@@ -1,0 +1,48 @@
+
+input.btn-add-project {
+  font-weight: 400;
+  font-size: 1em;
+  padding-left: .5rem;
+  margin: 1em 0;
+
+  border: none;
+  width: 100%;
+  border-bottom: 3px solid #fff;
+
+  background: var(--lightgreen);
+  color: var(--darkblue);
+  border-radius: 6px;
+  padding: .5em;
+  text-align: center;
+  transition: .3s;
+}
+
+input.btn-add-project:hover {
+  background: var(--green);
+}
+
+input.btn-add-project:focus {
+  outline: none;
+  border-bottom: 3px solid var(--green);
+  border-radius: 0;
+  background: transparent;
+}
+
+input.btn-add-project::placeholder {
+  font-weight: 400;
+  font-size: 1em;
+  color: var(--green);
+  opacity: 1;
+}
+input.btn-add-project:hover::placeholder,
+input.btn-add-project:focus::placeholder {
+  color: #fff;
+}
+
+.btn-add-project:hover {
+  cursor: pointer;
+}
+
+.btn-add-project-contain {
+  position: relative;
+}

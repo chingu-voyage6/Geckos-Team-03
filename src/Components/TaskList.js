@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dragula from 'react-dragula';
+import './css/tasklist.css';
 
 // controls rendering and animation for list of projects and tasks
 class TaskList extends Component {
