@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import View from './View';
 
+// timer sounds
 import Bell from './Sounds/bell.mp3';
 import Triumph from './Sounds/triumph.mp3';
 import LevelUp from './Sounds/levelup.mp3';
@@ -14,8 +15,8 @@ class Pomodoro extends Component {
     this.state = {
       activeTimer: {
         name: 'work',
-        timeRemaining: 1500000,
-        duration: 1500000, // so that settings changes does not alter things - freeze timer duration
+        timeRemaining: 1500000, // ms remaining
+        duration: 1500000, // total timer duration in ms
         paused: true,
         untilTime: 0,
         intervalID: 0,
@@ -42,7 +43,7 @@ class Pomodoro extends Component {
       // WORK TIMER
       work: {
         name: 'work',
-        duration: 1500000, // mseconds - 25 min default - 
+        duration: 1500000, // mseconds - 25 min default
         sound: 'Triumph',
       },
 
@@ -101,14 +102,10 @@ class Pomodoro extends Component {
 
     this.setMouseDown = this.setMouseDown.bind(this);
     this.setMouseUp = this.setMouseUp.bind(this);
-
     this.timerFunc = this.timerFunc.bind(this);
     this.onTimerEnd = this.onTimerEnd.bind(this);
-
     this.timerStyler = this.timerStyler.bind(this);
-
     this.changeState = this.changeState.bind(this);
-
     this.handleSampleSound = this.handleSampleSound.bind(this);
   }
 
@@ -141,13 +138,8 @@ class Pomodoro extends Component {
   //                                                                              FUNCTIONS
   // -----------------------------------------------------------------------------------------
 
-  // --------------------------------------------------------------------------
-  //                                           timer function
-  // --------------------------------------------------------------------------
-
   // timer function called every second while timer is on
   timerFunc() {
-    // clone active timer
     const timer = {...this.state.activeTimer};
 
     // if timer ends
@@ -157,14 +149,8 @@ class Pomodoro extends Component {
     }
 
     timer.timeRemaining = Math.round(timer.untilTime - Date.now());
-
-    // set new state
     this.setState({ activeTimer: timer }) 
   }
-
-  // --------------------------------------------------------------------------
-  //                                           timer ends
-  // --------------------------------------------------------------------------
 
   onTimerEnd() {
     let activeTimer = {...this.state.activeTimer};
@@ -192,11 +178,6 @@ class Pomodoro extends Component {
 
     this.setState({ activeTimer }, this.timerStyler);
   };
-
-
-  // --------------------------------------------------------------------------
-  //       timer styler - does not really belong here - styled components coming
-  // --------------------------------------------------------------------------
 
   timerStyler() {
 
@@ -232,7 +213,6 @@ class Pomodoro extends Component {
 
     }  
 
-    // set new styles
     this.setState({ styles });
   }
 
