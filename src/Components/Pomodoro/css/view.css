@@ -1,13 +1,12 @@
-/* So the first css file - define global styling for Pomodoro module */
+/* the topmost css file - defines global styling for Pomodoro component */
 .pomodoro-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
 
-  margin: 0 0;
+  margin: 0;
   padding: 0 .5em;
-  background: #fff;
   border-bottom: 3px solid var(--darkblue);
   position: relative;
   max-height: 0;

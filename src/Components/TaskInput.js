@@ -8,6 +8,7 @@ class TaskInput extends Component {
       inputValue: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   } 
 
   componentDidMount() {
@@ -18,12 +19,16 @@ class TaskInput extends Component {
     this.setState({ inputValue: e.target.value });
   }
 
+  handleBlur() {
+    this.setState({ inputValue: '' });
+  }
+
   render() { return (
       <form onSubmit={(e) => {
         this.setState({ inputValue: '' })
         this.props.onAddTask(e, this.state.inputValue);
       }}>
-        <input onChange={this.handleInputChange} value={this.state.inputValue} ref='input' className='main-input' autoFocus placeholder="What do you want to get done?" />
+        <input onChange={this.handleInputChange} onBlur={this.handleBlur} value={this.state.inputValue} ref='input' className='main-input' autoFocus placeholder="What do you want to get done?" />
       </form>
     )}
 }

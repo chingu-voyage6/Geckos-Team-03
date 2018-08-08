@@ -1,7 +1,7 @@
 
 .sidebar {
   background: var(--lightblue);
-  width: 66%;
+  width: 55%;
   position: relative;
   text-align: center;
   transition: .3s;
@@ -9,23 +9,25 @@
 
 .sidebar-content {
   transition: .1s;
+  padding: 2.2em;
 }
 
 .sidebar h3.side-info {
   padding: 6em 1em;
   font-size: 1.2em;
   color: var(--grey);
+  font-weight: 400;
 }
 
 .btn-add-tool {
   font-weight: 400;
   font-size: 1em;
   padding-left: .5rem;
-  margin: 2em auto;
+  margin: 0 auto;
   line-height: 1em;
 
   border: none;
-  width: 85%;
+  width: 100%;
   border-bottom: 3px solid rgba(0,0,0,0);
 
   background: #fff;
