@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/taskinput.css';
 
 class TaskInput extends Component {
   constructor(props) {

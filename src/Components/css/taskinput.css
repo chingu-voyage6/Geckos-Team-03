@@ -1,0 +1,19 @@
+.main-input {
+  width: 100%;
+  border: none;
+  font-size: 1.2em;
+  margin-bottom: 2.2em;
+  border-bottom: 3px solid #fff;
+  padding: .5em 1em;
+  background: var(--lightgrey);
+  transition: .3s;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.main-input:focus {
+  outline: none;
+  border-bottom: 3px solid var(--babyblue);
+  background: #fff;
+  border-radius: 0;
+}

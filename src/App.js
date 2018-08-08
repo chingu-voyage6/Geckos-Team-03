@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './app.css';
 import TaskInput from './Components/TaskInput';
 import ProjectInput from './Components/ProjectInput';
 import TaskList from './Components/TaskList';
