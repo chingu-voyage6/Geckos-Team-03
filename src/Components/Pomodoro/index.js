@@ -14,8 +14,8 @@ class Pomodoro extends Component {
     this.state = {
       activeTimer: {
         name: 'work',
-        timeRemaining: 15000,
-        duration: 15000, // so that settings changes does not alter things - freeze timer duration
+        timeRemaining: 1500000,
+        duration: 1500000, // so that settings changes does not alter things - freeze timer duration
         paused: true,
         untilTime: 0,
         intervalID: 0,
@@ -42,21 +42,21 @@ class Pomodoro extends Component {
       // WORK TIMER
       work: {
         name: 'work',
-        duration: 15000, // mseconds - 25 min default
+        duration: 1500000, // mseconds - 25 min default - 
         sound: 'Triumph',
       },
 
       // BREAK TIMER
       break: {
         name: 'break',
-        duration: 3000, // mseconds - 5 min default
+        duration: 300000, // mseconds - 5 min default
         sound: 'Bell',
       },
 
       // LONG BREAK TIMER
       longBreak: {
         name: 'longBreak',
-        duration: 9000, // mseconds - 15 min default
+        duration: 900000, // mseconds - 15 min default
         sound: 'Winning'
       },
 
@@ -160,7 +160,6 @@ class Pomodoro extends Component {
 
     // set new state
     this.setState({ activeTimer: timer }) 
-    console.log(timer.timeRemaining);
   }
 
   // --------------------------------------------------------------------------
