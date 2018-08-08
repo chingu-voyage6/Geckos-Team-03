@@ -11,6 +11,7 @@ class TaskList extends Component {
     }
     this.setMaxHeights = this.setMaxHeights.bind(this);
     this.handleProjectAddTaskChange = this.handleProjectAddTaskChange.bind(this);
+    this.handleProjectAddTaskBlur = this.handleProjectAddTaskBlur.bind(this);
   }
   
   componentDidMount() {
@@ -74,6 +75,12 @@ class TaskList extends Component {
   handleProjectAddTaskChange(e) {
     this.setState({ projectAddTaskInput: e.target.value });
   }
+
+  // if user clicks away from task input, it animates away and resets - smoothly
+  handleProjectAddTaskBlur(projectId) {
+    this.refs[`${projectId}-form`].style.maxHeight = 0;
+    this.setState({ projectAddTaskInput: '' });
+  }
   
   render() {
 
@@ -82,8 +89,8 @@ class TaskList extends Component {
 
       {/* Unsorted tasks list */}
       <div ref='unsortedTasksGroup' className='project-group'>
-        <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
-        <h3>
+        <input ref="toggle-unsorted" type="checkbox" className='toggle-collapse' name='toggle-collapse' />
+        <h3 onClick={() => this.refs['toggle-unsorted'].checked = !this.refs['toggle-unsorted'].checked}>
           Unsorted tasks
         </h3>
       <ul ref='unsortedTasksList' data-id='unsortedTasksList' className='project-tasks'>
@@ -141,7 +148,7 @@ class TaskList extends Component {
             this.props.onProjectAddTask(e, this.state.projectAddTaskInput, project.id);
             this.setState({ projectAddTaskInput: '' });
           }}><input value={this.state.projectAddTaskInput} onChange={this.handleProjectAddTaskChange} 
-            onBlur={() => this.refs[`${project.id}-form`].style.maxHeight = 0} 
+            onBlur={() => this.handleProjectAddTaskBlur(project.id)} 
             type="text" className='project-add-task' placeholder="Enter a task name" /></form>
 
         <ul ref={`${project.id}-list`} data-id={project.id} className='project-tasks'>

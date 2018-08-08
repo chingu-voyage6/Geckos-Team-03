@@ -131,14 +131,6 @@
   padding-bottom: .5em;
 }
 
-/* for selected task underline */
-.task-item:hover {
-  cursor: pointer;
-}
-.mwidth-100 {
-  max-width: 100%;
-}
-
 ul.project-tasks li {
   margin-bottom: 1.2em;
   font-size: 0.9em;
@@ -247,4 +239,13 @@ input.project-add-task:focus {
 }
 .gu-transit {
   opacity: 0.2 !important;
+}
+
+
+/* for selected task underline */
+.task-item:hover {
+  cursor: pointer;
+}
+.mwidth-100 {
+  max-width: 100%;
 }
