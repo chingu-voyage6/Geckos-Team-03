@@ -5,6 +5,7 @@ import Counters from './Counters';
 import Settings from './Settings';
 import './css/view.css';
 
+// view controller for pomodoro component
 class View extends Component {
 
   componentDidMount() {

@@ -18,8 +18,6 @@ class ShowTime extends Component {
     } else if (msecs < 100) {
       msecs = `0${msecs}`;
     }
-
-    document.title = `${mins}:${secs} - pomodoro timer`;
     return (
     <div className="show-time">
       {mins}:{secs}
