@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dragula from 'react-dragula';
 
+// controls rendering and animation for list of projects and tasks
 class TaskList extends Component {
   constructor(props) {
     super(props);
@@ -25,8 +26,6 @@ class TaskList extends Component {
           `${this.refs.unsortedTasksList.scrollHeight}px`;
       this.refs.unsortedTasksGroup.style.maxHeight = 
           `${this.refs.unsortedTasksList.scrollHeight + 120}px`;
-          // this does not work, it doesn't compute the actual value - so just add 70px
-          // `${this.refs.unsortedTasksGroup.scrollHeight}px`;
     }
 
     this.props.projects.forEach(project => {
@@ -34,17 +33,18 @@ class TaskList extends Component {
           `${this.refs[`${project.id}-list`].scrollHeight}px`;
       this.refs[project.id].style.maxHeight = 
           `${this.refs[`${project.id}-list`].scrollHeight + 120}px`;
-          // `${this.refs[project.id].scrollHeight}px`;
-    })
+    });
   }
 
+  // dragula drag and drop - passed as a ref to containing div
   dragulaDecorator = () => {
     const projects = [...this.props.projects];
     const containers = [this.refs.unsortedTasksList];
     projects.forEach(project => containers.push(this.refs[`${project.id}-list`]));
 
-    if (containers.length > 0) {
+    if (containers.length) {
       let options = { containers };
+      // execute dragula and reset max height animations whenever a task is dragged around
       Dragula(options)
         .on('drag', () => {
           this.setMaxHeights();
@@ -66,12 +66,10 @@ class TaskList extends Component {
         .on('shadow', () => {
           this.setMaxHeights();
         })
-        .on('out', () => {
-          this.setMaxHeights();
-        });
     }
   }
 
+  // controlled form input for adding task directly to a project
   handleProjectAddTaskChange(e) {
     this.setState({ projectAddTaskInput: e.target.value });
   }
@@ -81,39 +79,39 @@ class TaskList extends Component {
     return (
     <div ref={this.dragulaDecorator}>
 
-        <div ref='unsortedTasksGroup' className='project-group'>
-            <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
-            <h3>
-              Unsorted tasks
-            </h3>
-        <ul ref='unsortedTasksList' data-id='unsortedTasksList' className='project-tasks'>
+      {/* Unsorted tasks list */}
+      <div ref='unsortedTasksGroup' className='project-group'>
+        <input type="checkbox" className='toggle-collapse' name='toggle-collapse' />
+        <h3>
+          Unsorted tasks
+        </h3>
+      <ul ref='unsortedTasksList' data-id='unsortedTasksList' className='project-tasks'>
 
-          {this.props.tasks.map(task => {
-            if (task.project === '') { 
-              return (
-              <li ref={task.id} key={task.id} data-id={task.id}>
-                <input type="checkbox" /> <span className="checkTask" />
-                <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
-                  {task.name}
-                </span>
+        {this.props.tasks.map(task => {
+          if (task.project === '') { 
+            return (
+            <li ref={task.id} key={task.id} data-id={task.id}>
+              <input type="checkbox" /> <span className="checkTask" />
+              <span className="task-item" onClick={this.props.onSelectTask} data-id={task.id}>
+                {task.name}
+              </span>
 
-                {/* <div className='drag-button'><i class="fas fa-grip-vertical"></i></div> */}
+              <div className='delete-button' onClick={() => {
+                this.refs[task.id].style.opacity = 0;
+                setTimeout(() => this.props.onDeleteTask(task.id), 300);
+              }}>✕</div>
 
-                <div className='delete-button' onClick={() => {
-                  this.refs[task.id].style.opacity = 0;
-                  setTimeout(() => this.props.onDeleteTask(task.id), 300);
-                }}>✕</div>
+              {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
+            </li>
+          )} else {
+            return '';
+          }
+        })}
 
-                {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
-              </li>
-            )} else {
-              return '';
-            }
-          })}
+      </ul>
+    </div>
 
-        </ul>
-      </div>
-
+    {/* task lists for each project */}
     {this.props.projects.map(project => {
       return (
         <div ref={project.id} key={project.id} className='project-group'>

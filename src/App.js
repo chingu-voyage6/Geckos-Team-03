@@ -4,22 +4,22 @@ import ProjectInput from './Components/ProjectInput';
 import TaskList from './Components/TaskList';
 import Sidebar from './Components/Sidebar';
 
+// main App component contains all state and overarching functions
+
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.uuidv4 = require('uuid/v4');
-    this.chinguId = this.uuidv4();
-    this.anotherId = this.uuidv4();
+    // demo project id
+    this.chinguDemoId = this.uuidv4();
+
     this.state = {
       projects: [
         {
           name: 'Lucid Chingu project',
-          id: this.chinguId,
-        },
-        {
-          name: 'Another React app',
-          id: this.anotherId,
-        },
+          id: this.chinguDemoId,
+        }
       ],
       tasks: [
         {
@@ -32,48 +32,28 @@ class App extends Component {
         {
           name: 'Define our mvp for the project',
           id: this.uuidv4(),
-          project: this.chinguId,
+          project: this.chinguDemoId,
           selected: false,
           tools: [],
         },
         {
           name: 'Clear direction for design and workflow',
           id: this.uuidv4(),
-          project: this.chinguId,
+          project: this.chinguDemoId,
           selected: false,
           tools: [],
         },
         {
           name: 'Define the components we will pull together',
           id: this.uuidv4(),
-          project: this.chinguId,
-          selected: false,
-          tools: [],
-        },
-        {
-          name: 'Get audio working in React',
-          id: this.uuidv4(),
-          project: this.anotherId,
-          selected: false,
-          tools: [],
-        },
-        {
-          name: 'Implement settings for global and each individual timer',
-          id: this.uuidv4(),
-          project: this.anotherId,
-          selected: false,
-          tools: [],
-        },
-        {
-          name: 'Added another task',
-          id: this.uuidv4(),
-          project: this.anotherId,
+          project: this.chinguDemoId,
           selected: false,
           tools: [],
         },
       ]
     }
 
+    // THIS BINDINGS
     this.handleSelectTask = this.handleSelectTask.bind(this);
     this.handleAddTool = this.handleAddTool.bind(this);
     this.handleDeleteTool = this.handleDeleteTool.bind(this);
@@ -84,6 +64,7 @@ class App extends Component {
     this.handleMoveTask = this.handleMoveTask.bind(this);
   }
 
+  // toggles whether the task passed in is selected, and deselects all other tasks
   handleSelectTask(e) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
@@ -94,7 +75,7 @@ class App extends Component {
     this.setState({ tasks });
   }
 
-  // for now it can just add a pomodoro component
+  // adds a tool to selected task (for now just a pomodoro timer)
   handleAddTool(taskID) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
@@ -106,6 +87,7 @@ class App extends Component {
     this.setState({ tasks });
   }
 
+  // deletes the tool with the id passed in from the selected task
   handleDeleteTool(toolId) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
@@ -121,6 +103,7 @@ class App extends Component {
     this.setState({ tasks });
   }
 
+  // adds a new empty project to the list
   handleAddProject(e, input) {
     e.preventDefault();
     if (input === "") {
@@ -134,12 +117,15 @@ class App extends Component {
     this.setState({projects})
   }
 
+  // removes a project and all of its contained tasks from the list
   handleDeleteProject(projectId) {
+    // remove project
     const projects = [...this.state.projects];
     const selectedProject = projects.filter(project => project.id === projectId);
     const index = projects.indexOf(selectedProject[0]);
     projects.splice(index, 1);
 
+    // remove all contained tasks
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
       if (task.project === projectId) {
@@ -151,6 +137,7 @@ class App extends Component {
     this.setState({ projects, tasks });
   }
 
+  // deletes a task from the list
   handleDeleteTask(taskId) {
     const tasks = [...this.state.tasks];
     const selectedTask = tasks.filter(task => task.id === taskId);
@@ -159,13 +146,14 @@ class App extends Component {
     this.setState({ tasks });
   }
 
+  // adds a new task to the top of the list
   handleAddTask(e, taskName, projectId = '') {
     e.preventDefault();
     if (taskName === "") {
       return;
     }
+
     const tasks = [...this.state.tasks];
-    // add a task to the top of the array
     tasks.unshift({
       name: taskName,
       id: this.uuidv4(),
@@ -173,10 +161,12 @@ class App extends Component {
       selected: false,
       tools: [],
     });
+
     this.setState({ tasks });
   }
 
-  // want to get this working, so that *project lists* reflect *state*
+  // CURRENTLY DISCONNECTED
+  // when a task is moved (dragged), state should reflect this
   handleMoveTask(taskId, projectId) {
     const tasks = [...this.state.tasks];
     tasks.forEach(task => {
@@ -187,28 +177,28 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="header">
-          <div className="header-group">
-            <img alt="Lucid infinity logo" className="logo" src={require('./images/lucid-logo.png')} />
-            <h1 className="header-title">Lucid</h1>
-          </div>
-        </div>
         <div className="app">
           <div className="main-content">
-
-            <TaskInput onAddTask={this.handleAddTask} />
-            <TaskList {...this.state} onSelectTask={this.handleSelectTask} onDeleteProject={this.handleDeleteProject} onDeleteTask={this.handleDeleteTask} onMoveTask={this.handleMoveTask} onProjectAddTask={this.handleAddTask}/>
-            <ProjectInput onAddProject={this.handleAddProject} />
-
+            <TaskInput 
+              onAddTask={this.handleAddTask} 
+            />
+            <TaskList {...this.state} 
+              onSelectTask={this.handleSelectTask} 
+              onDeleteProject={this.handleDeleteProject} 
+              onDeleteTask={this.handleDeleteTask} 
+              onMoveTask={this.handleMoveTask} 
+              onProjectAddTask={this.handleAddTask}
+            />
+            <ProjectInput 
+              onAddProject={this.handleAddProject} 
+            />
           </div>
-
-          {/* sidebar gets passed whichever task is selected as a prop */}
-          <Sidebar selectedTask={this.state.tasks.filter(task => task.selected)[0]} onAddTool={this.handleAddTool} onDeleteTool={this.handleDeleteTool}/>
-
+          <Sidebar 
+            selectedTask={this.state.tasks.filter(task => task.selected)[0]} 
+            onAddTool={this.handleAddTool} 
+            onDeleteTool={this.handleDeleteTool}
+          />
         </div>
-        <div className="footer"></div>
-      </div>
     );
   }
 }
