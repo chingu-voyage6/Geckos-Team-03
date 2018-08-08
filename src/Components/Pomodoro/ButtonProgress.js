@@ -1,44 +1,21 @@
-// this could be split into some sub-components
 // play/pause button and circular progress bar component
-
 import React, { Component } from 'react';
 import './css/buttonProgress.css';
 
 class ButtonProgress extends Component {
   constructor(props) {
     super(props);
-    
     this.progressCircle = this.progressCircle.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
     this.handleReset = this.handleReset.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-  handleKeyPress(e) {
-    if (e.key === ' ') {
-      this.handlePlayPause();
-    } else if (e.key === 'Escape') {
-      this.handleReset();
-    }
   }
 
   componentDidMount() {
+    // global values for drawing circular progress
     this.circle = this.refs.circle.getContext('2d');
-
     this.startPoint = 4.72;
-
     this.cw = this.circle.canvas.width;
     this.ch = this.circle.canvas.height;
-    console.log(this.cw, this.ch);
-
-    // optimised animation
-    requestAnimationFrame(this.progressCircle);
-
-    document.addEventListener('keyup', this.handleKeyPress);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keyup', this.handleKeyPress);
   }
 
   componentDidUpdate(){
@@ -63,22 +40,22 @@ class ButtonProgress extends Component {
 
     timer.paused = !timer.paused;
 
-    this.props.changeState({activeTimer: timer})
+    this.props.changeState({ activeTimer: timer })
   }
 
   // --------------------------------------------------------------------------
   //                                           handle reset
   // --------------------------------------------------------------------------
 
-  // default back to work timer
   handleReset() {
     const activeTimer = {...this.props.activeTimer};
-
+    
     // end any running timer function
     clearInterval(activeTimer.intervalID);
-
+    
     const duration = this.props.work.duration;
     
+    // default back to work timer
     activeTimer.name = 'work';
     activeTimer.timeRemaining = duration;
     activeTimer.duration = duration;

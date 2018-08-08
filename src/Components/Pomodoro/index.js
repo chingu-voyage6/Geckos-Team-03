@@ -1,5 +1,4 @@
 // all state is stored here, as well as top-most timer functions and sounds
-
 import React, { Component } from 'react';
 import View from './View';
 
