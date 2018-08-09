@@ -15,13 +15,16 @@ class View extends Component {
       this.refs.container.style.maxHeight = '14em';
       this.refs.container.style.opacity = 1;
       this.refs.container.style.marginBottom = '2em';
-      this.refs.container.style.padding = '1em';
+      this.refs.container.style.padding = '1.5em 1em';
     }, 0);
   }
 
   render() {
     return (
     <div ref='container' className="pomodoro-container">
+
+    {/* ICON BUTTONS */}
+
     <div className='delete-button' data-id={this.props.thisTool.id} onClick={() => {
       this.refs.container.style.maxHeight = 0;
       this.refs.container.style.opacity = 0;
@@ -31,6 +34,11 @@ class View extends Component {
       setTimeout(() => this.props.onDeleteTool(this.props.thisTool.id), 300)
     }}>✕</div>
 
+    <div className='options-button' onClick={() => this.props.changeState({ showSettings: !this.props.showSettings })}>
+      <i className="fas fa-cog"></i>
+    </div>
+
+    {/* CONTENT WHEN SETTINGS ARE NOT SHOWN */}
     {!this.props.showSettings ? (
       <div>
       <div className='flex-line'>
@@ -49,7 +57,7 @@ class View extends Component {
 
         <Counters 
           pomodoros={this.props.pomodoros}
-          goal={this.props.goal}
+          estimate={this.props.estimate}
         />
       </div>
 
@@ -61,13 +69,14 @@ class View extends Component {
       <TimerTitles 
         activeTimer={this.props.activeTimer}
         titleStyles={this.props.styles.titles}
-      />
+        />
 
       </div>
     ) :
-    (
+    ( //SETTINGS DISPLAY
       <Settings
         changeState={this.props.changeState}
+        titleStyles={this.props.styles.titles}
         activeTimer={this.props.activeTimer}
         mouseDown={this.props.mouseDown}
         work={this.props.work}

@@ -1,79 +1,24 @@
 
-  /* --------------------------------------------------------------------------- */
- /*                                SETTINGS                                     */
-/* --------------------------------------------------------------------------- */
-
-.timer-settings {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1em;
-}
-
-.timer-settings-content {
-  overflow: hidden;
-  transition: 1s;
-}
-
-  /* ---------------------------------------------------- */
- /*                              settings inners         */
-/* ---------------------------------------------------- */
-
-/* this allows for the settings view toggle - max-height works for CSS transition */
-.timer-settings-content {
-  max-height: 0;
-  overflow: hidden;
-}
-
 .settings-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   transition: color 0.2s;
-  margin: 1em 0;
-  border-bottom: 3px solid var(--darkgrey);
+  border-bottom: 1px solid var(--grey);
   text-transform: lowercase;
-  width: 220px;
+  width: 100%;
   position: relative;
+  color: var(--grey);
 }
 
 .decrement, .increment {
   border: none;
   background: transparent;
   font-weight: 100;
-  font-size: 2rem;
-  color: var(--darkgrey);
+  color: var(--black);
 }
 
 .decrement:hover, .increment:hover {
   cursor: pointer;
-  font-weight: bold;
-}
-
-.settings-item:hover {
-  color: var(--black);
-}
-
-.settings-work .settings-item:hover a.decrement,
-.settings-work .settings-item:hover a.increment {
-  color: var(--lightred);
-  opacity: 1;
-}
-
-.settings-break .settings-item:hover a.decrement,
-.settings-break .settings-item:hover a.increment {
-  color: var(--lightorange);
-  opacity: 1;
-}
-
-.settings-long-break .settings-item:hover a.decrement,
-.settings-long-break .settings-item:hover a.increment {
-  color: var(--lightgreen);
-  opacity: 1;
-}
-
-.settings-goal,
-.settings-lb-set {
-  margin-top: 30px;
 }

@@ -27,7 +27,7 @@ class SoundSetter extends Component {
           else { newIndex-- }
   
           this.handleSoundSelect(this.props.sounds[newIndex]);
-        }}>◀</a>
+        }}>&lt;</a>
           <ul className='sound-list'>
             {this.props.sounds.map(sound => {
               return <li key={`${sound}`} className={sound === this.props.timer.sound ? 'sound-active' : 'sound-hidden'}><span className='sound-icon' onClick={() => this.props.onSampleSound(this.props.timer.name)}><i className="fas fa-volume-up"></i></span> {sound}</li>
@@ -40,7 +40,7 @@ class SoundSetter extends Component {
           else { newIndex++ }
   
           this.handleSoundSelect(this.props.sounds[newIndex]);
-        }}>►</a>
+        }}>&gt;</a>
         <div className='sound-progress'>
           {this.props.sounds.map((sound, index) => {
             return <div onClick={() => this.handleSoundSelect(this.props.sounds[index])} key={`${sound}`} className={sound === this.props.timer.sound ? 'sound-progress-tab sound-progress-tab-active' : 'sound-progress-tab'}></div>

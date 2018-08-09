@@ -27,9 +27,9 @@ class Pomodoro extends Component {
       // helps with the settings incrementors/decrementors that fire while the mouse is down
       mouseDown: false,
 
-      // pomodoros completed, pomodoro goal, pomodoros between each long break
+      // pomodoros completed, pomodoro estimate, pomodoros between each long break
       pomodoros: 0,
-      goal: 8,
+      estimate: 8,
       pomodoroSet: 4,
 
       // sound names to assign to a timer

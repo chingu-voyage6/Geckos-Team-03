@@ -1,40 +1,17 @@
-
-  /* ---------------------------------------------------- */
- /*                              sound settings          */
-/* ---------------------------------------------------- */
-
 .settings-sound {
-  /* allow progress circles to wrap */
   flex-wrap: wrap;
   text-align: center;
-  border-bottom: 1px solid var(--faintgrey);
-  border-top: 1px solid var(--faintgrey);
-  padding-bottom: 15px;
 }
 
 .sound-prev-arrow,
 .sound-next-arrow {
   font-size: .8em;
-  color: var(--darkgrey);
+  color: var(--grey);
   transition: color .3s;
 }
-
 .sound-prev-arrow:hover,
 .sound-next-arrow:hover {
   cursor: pointer;
-}
-
-.settings-sound-work:hover .sound-prev-arrow,
-.settings-sound-work:hover .sound-next-arrow {
-  color: var(--lightred);
-}
-.settings-sound-break:hover .sound-prev-arrow,
-.settings-sound-break:hover .sound-next-arrow {
-  color: var(--lightorange);
-}
-.settings-sound-longBreak:hover .sound-prev-arrow,
-.settings-sound-longBreak:hover .sound-next-arrow {
-  color: var(--lightgreen);
 }
 
 .settings-sound .sound-icon {
@@ -53,26 +30,20 @@
   left: 2em;
 }
 
-.settings-item:hover .sound-icon {
-  background: var(--lightgrey);
-  cursor: pointer;
-}
-
 .settings-sound i {
   font-size: .7em;
-  color: var(--darkgrey);
+  color: var(--grey);
 }
 
 .settings-sound ul {
   margin: 0;
-  padding: .5em;
+  padding: 0;
 }
 
 .settings-sound ul li {
   list-style: none;
   text-align: center;
   transition: .2s;
-  padding: .5em 0;
 }
 
 .settings-sound ul li:hover {
@@ -100,34 +71,11 @@
 }
 
 .sound-progress-tab {
-  background: var(--medgrey);
+  background: var(--grey);
   height: 13px;
   width: 13px;
   margin: 0 4px;
   border-radius: 100%;
   transition: .3s;
   opacity: 0;
-}
-.sound-progress-tab:hover {
-  cursor: pointer;
-  background: var(--lightgrey);
-}
-
-.settings-work .sound-progress-tab:hover:not(.sound-progress-tab-active) {
-  background: var(--darkred);
-}
-.settings-work .sound-progress-tab-active {
-  background: var(--lightred);
-}
-.settings-break .sound-progress-tab:hover:not(.sound-progress-tab-active) {
-  background: var(--darkorange);
-}
-.settings-break .sound-progress-tab-active {
-  background: var(--lightorange);
-}
-.settings-long-break .sound-progress-tab:hover:not(.sound-progress-tab-active) {
-  background: var(--darkgreen);
-}
-.settings-long-break .sound-progress-tab-active {
-  background: var(--lightgreen);
 }

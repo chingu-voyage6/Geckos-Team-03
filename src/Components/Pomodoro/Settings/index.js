@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoalSetter from './GoalSetter';
+import EstimateSetter from './EstimateSetter';
 import LongBreakSetter from './LongBreakSetter';
 import SoundSetter from './SoundSetter';
 import TimeSetter from './TimeSetter';
@@ -7,17 +7,28 @@ import './css/settings.css';
 
 // container and title for timers' settings component
 class Settings extends Component {
-  // --------------------------------------------------------------------------
-  //                                           change pomodoro goal
-  // --------------------------------------------------------------------------
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTimer: this.props.activeTimer.name
+    }
+  }
 
   render() {
     return (
     <div className="timer-settings">
 
-      <div className="settings-group settings-work">
-        <div className="timer-title work-title" style={this.props.titleStyles.workTitle}>Work</div>
-        <div className="timer-settings-content" style={this.props.settingsStyle}>
+      <div className="timertitles">
+        <div className="timertitle work-title"
+          onClick={() => this.setState({ selectedTimer: 'work' })}>Work</div>
+        <div className="timertitle break-title"
+          onClick={() => this.setState({ selectedTimer: 'break' })}>Break</div>
+        <div className="timertitle long-break-title"
+          onClick={() => this.setState({ selectedTimer: 'longBreak' })}>Long Break</div>
+      </div>
+
+        {this.state.selectedTimer === 'work' &&
+        <div>
           <TimeSetter 
             className='settings-timer-work' 
             timer={this.props.work}
@@ -32,14 +43,14 @@ class Settings extends Component {
             activeTimer={this.props.activeTimer}
             sounds={this.props.sounds}
           />
-          <GoalSetter changeState={this.props.changeState} goal={this.props.goal} mouseDown={this.props.mouseDown} />
+          <EstimateSetter changeState={this.props.changeState} estimate={this.props.estimate} mouseDown={this.props.mouseDown} />
        
         </div> 
-      </div>
-      
-      <div className="settings-group settings-break">
-        <div className="timer-title break-title" style={this.props.titleStyles.breakTitle}>Break</div>
-        <div className="timer-settings-content" style={this.props.settingsStyle}>
+        }
+
+        {this.state.selectedTimer === 'break' &&
+        <div>
+
           <TimeSetter 
             classname='settings-timer-break' 
             timer={this.props.break} 
@@ -54,12 +65,12 @@ class Settings extends Component {
             activeTimer={this.props.activeTimer}
             sounds={this.props.sounds}
           />
-        </div>
-      </div>
+       
+        </div> 
+        }
 
-      <div className="settings-group settings-long-break">
-        <div className="timer-title long-break-title" style={this.props.titleStyles.longBreakTitle}>Long Break</div>
-        <div className="timer-settings-content" style={this.props.settingsStyle}>
+        {this.state.selectedTimer === 'longBreak' &&
+          <div>
           <TimeSetter 
             classname='settings-timer-long-break' 
             timer={this.props.longBreak} 
@@ -79,10 +90,10 @@ class Settings extends Component {
             pomodoroSet={this.props.pomodoroSet}
             mouseDown={this.props.mouseDown}
           />
-        </div>
-      </div> 
-
-
+       
+        </div> 
+        }
+   
     </div>
   )}
 }
