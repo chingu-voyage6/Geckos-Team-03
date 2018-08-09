@@ -162,7 +162,10 @@ class TaskList extends Component {
                 </span>
 
                 <div className='delete-button' onClick={() => {
+                  this.refs[task.id].style.maxHeight = 0;
+                  this.refs[task.id].style.marginBottom = 0;
                   this.refs[task.id].style.opacity = 0;
+                  this.refs[task.id].style.overflow = 'hidden';
                   setTimeout(() => this.props.onDeleteTask(task.id), 300);
                 }}>✕</div>
 

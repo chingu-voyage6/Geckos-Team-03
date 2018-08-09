@@ -5,8 +5,8 @@
 
 .show-time {
   display: flex;
-  font-size: 3em;
-  color: var(--darkblue);
+  font-size: 2.5em;
+  color: var(--grey);
   /* background: var(--lightgrey); */
   padding: .1em;
   margin: .1em;

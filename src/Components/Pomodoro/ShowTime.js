@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/showTime.css';
+import './css/showtime.css';
 
 // displays the timer's current time formatted
 class ShowTime extends Component {

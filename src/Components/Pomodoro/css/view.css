@@ -6,20 +6,21 @@
   flex-wrap: wrap;
 
   margin: 0;
-  padding: 0 .5em;
-  border-bottom: 3px solid var(--darkblue);
   position: relative;
   max-height: 0;
   overflow: hidden;
   transition: .3s;
   opacity: 0;
+  background: #fff;
+  border-radius: 6px;
+  padding: 1em;
 }
 
 .pomodoro-container .delete-button {
   font-size: 1.2em;
-  opacity: .85;
-  right: .4em;
-  top: .4em;
+  opacity: .4;
+  right: .2em;
+  top: .2em;
 }
 
 .pomodoro-details {
@@ -41,4 +42,11 @@
   cursor: pointer;
   background: #f00;
   color: #fff;
+}
+
+.flex-line {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
 }

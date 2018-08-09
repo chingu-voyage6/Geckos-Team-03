@@ -79,7 +79,7 @@ h1.header-title {
 }
 
 .app {
-  border-top: 24px solid var(--grey);
+  border-top: 18px solid var(--grey);
   width: 80%;
   max-width: 1020px;
   margin: 0 auto 13em auto;
