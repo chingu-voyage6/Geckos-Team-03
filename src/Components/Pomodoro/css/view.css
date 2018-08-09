@@ -1,9 +1,9 @@
 /* the topmost css file - defines global styling for Pomodoro component */
 .pomodoro-container {
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 
   margin: 0;
   position: relative;

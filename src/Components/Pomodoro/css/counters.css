@@ -1,43 +1,23 @@
-
-  /* --------------------------------------------------------------------------- */
- /*                                COUNTERS COMPONENT                           */
-/* --------------------------------------------------------------------------- */
-
-.counters,
-.counter-pomodoros,
-.counter-group,
-.counter-goal {
-  display: inline-block;
-  text-align: right;
-}
-
 .counters {
-  /* border: 1px solid red; */
-  background: var(--lightgrey);
   padding: .5em;
-  /* opacity: .5; */
+  color: var(--grey);
 }
 
-.counter-pomodoros {
+.counters .counter-pomodoros {
   font-size: 1.5em;
-  color: var(--black);
   font-weight: 200;
   letter-spacing: -.05em;
   line-height: 1em;
 }
 
-.counter-group {
-  margin-left: 10px;
-}
-
-.counter-goal {
+.counters .counter-estimate {
   font-size: 1em;
-  color: var(--grey);
-  line-height: 1em;
-  padding: 0 1em;
+  /* line-height: 1em; */
+  /* padding: 0 1em; */
 }
 
 .counter-text {
-  font-size: .6em;
+  font-size: .7em;
   line-height: 1em;
+  padding: .4em 0 0 0;
 }

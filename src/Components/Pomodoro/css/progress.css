@@ -1,6 +1,17 @@
 .progress {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
   background: var(--grey);
   width: 100%;
   border-radius: 6px;
   height: 12px;
+  overflow: hidden;
+  margin: .5em 0;
+}
+
+.progress-inner {
+  height: 100%;
+  background: var(--darkblue);
 }

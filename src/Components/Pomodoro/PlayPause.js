@@ -45,8 +45,10 @@ class PlayPause extends Component {
 
   render() {
     return (
-      <div className='playpause'>
-        <img src={require('./images/play.svg')} alt="play icon"/>
+      <div className='playpause' onClick={this.handlePlayPause}>
+          {this.props.activeTimer.paused 
+              ? <img src={require('./images/play.svg')} alt="play icon" className="play-icon"/>
+              : <img src={require('./images/pause.svg')} alt="pause icon" className="pause-icon"/>}
       </div>
     )
   }

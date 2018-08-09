@@ -6,7 +6,7 @@
 .show-time {
   display: flex;
   font-size: 2.5em;
-  color: var(--grey);
+  color: var(--darkblue);
   /* background: var(--lightgrey); */
   padding: .1em;
   margin: .1em;

@@ -29,6 +29,7 @@
   padding: .4em;
   border-bottom: 6px solid var(--medgrey);
   position: relative;
+  color: var(--grey);
 }
 
 .settings-work:hover .work-title,

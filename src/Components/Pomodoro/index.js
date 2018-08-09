@@ -19,6 +19,7 @@ class Pomodoro extends Component {
         paused: true,
         untilTime: 0,
         intervalID: 0,
+        progressPercent: 0,
       },
 
       showSettings: false,
@@ -83,16 +84,8 @@ class Pomodoro extends Component {
             color: '',
             borderBottom: '',
           }
-        },
-        settings: {
-          maxHeight: 0,
-        },
-        about: {
-          maxHeight: 0,
-          margin: 0,
-          padding: '0 2em',
         }
-      }
+      },
     }
 
   // -----------------------------------------------------------------------------------------
@@ -146,6 +139,10 @@ class Pomodoro extends Component {
       this.onTimerEnd(timer);
       return;
     }
+
+    // progress width (percentage)
+    const progressPercent = Math.floor((timer.duration - timer.timeRemaining) / timer.duration * 1000) / 10;
+    timer.progressPercent = progressPercent;
 
     timer.timeRemaining = Math.round(timer.untilTime - Date.now());
     this.setState({ activeTimer: timer }) 
@@ -210,7 +207,7 @@ class Pomodoro extends Component {
       styles.font.color = 'var(--green)';
       styles.background.background = 'var(--white)';
 
-    }  
+    }
 
     this.setState({ styles });
   }

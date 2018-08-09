@@ -7,7 +7,10 @@ class Progress extends Component {
   render() {
       return (
     <div className="progress">  
-
+        <div 
+          className="progress-inner" 
+          style={{ width: `${this.props.activeTimer.progressPercent}%` }
+        }/>
     </div>
     );
   }

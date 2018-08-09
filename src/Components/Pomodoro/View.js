@@ -33,6 +33,7 @@ class View extends Component {
     <div className='flex-line'>
       <PlayPause 
         changeState={this.props.changeState}
+        activeTimer={this.props.activeTimer}
         styles={this.props.styles}
         timerFunc={this.props.timerFunc}
         intervalID={this.props.intervalID}
@@ -54,8 +55,7 @@ class View extends Component {
       activeTimer={this.props.activeTimer}
     />
 
-    {/* titles to go here (apart from settings) */}
-
+    {/* titles to go here (separated from settings) */}
     <Settings
       changeState={this.props.changeState}
       activeTimer={this.props.activeTimer}
