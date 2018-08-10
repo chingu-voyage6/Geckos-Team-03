@@ -138,6 +138,9 @@ ul.project-tasks li {
   transition: .3s;
   opacity: 1;
 }
+.task-item {
+  transition: .3s;
+}
 /* checkbox */
 ul.project-tasks input {
   position: absolute;
@@ -173,11 +176,12 @@ ul.project-tasks input:checked ~ .task-item {
 
 /* placeholder for where the selection line would go */
 .task-border {
-  height: 6px;
+  height: 4px;
   width: 100%;
   background: var(--green);
   position: absolute;
-  bottom: -.3em;
+  bottom: -.2em;
+  left: -.2em;
   transition: .3s;
   max-width: 0;
 }

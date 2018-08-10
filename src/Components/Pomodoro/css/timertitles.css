@@ -1,0 +1,37 @@
+.timertitles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timertitle {
+  text-transform: lowercase;
+  display: inline-block;
+  transition: color .5s;
+  width: 30%;
+  height: 45px;
+  text-align: center;
+  padding: .4em;
+  border-bottom: 6px solid #fff;
+  position: relative;
+  color: var(--grey);
+}
+
+.work-title:hover {
+  cursor: pointer;
+  color: var(--black);
+  border-bottom: 6px solid var(--darkblue) !important;
+}
+
+.break-title:hover
+{
+  cursor: pointer;
+  color: var(--black);
+  border-bottom: 6px solid var(--grey) !important;
+}
+
+.long-break-title:hover {
+  cursor: pointer;
+  color: var(--black);
+  border-bottom: 6px solid var(--green) !important;
+}

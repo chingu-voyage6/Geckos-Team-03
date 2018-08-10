@@ -1,0 +1,16 @@
+.playpause {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 4rem;
+  height: 4rem;
+}
+
+.playpause:hover {
+  cursor: pointer;
+}
+
+.play-icon {
+  margin-left: 6px;
+}
