@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dragula from 'react-dragula';
+import Modal from './Modal';
 import './css/tasklist.css';
 
 // controls rendering and animation for list of projects and tasks
@@ -8,6 +9,9 @@ class TaskList extends Component {
     super(props);
     this.state = {
       projectAddTaskInput: '',
+      modal: {
+        show: false,
+      }
     }
     this.setMaxHeights = this.setMaxHeights.bind(this);
     this.handleProjectAddTaskChange = this.handleProjectAddTaskChange.bind(this);
@@ -137,11 +141,16 @@ class TaskList extends Component {
         </div>
 
         <div className='delete-button' onClick={() => {
-          this.refs[project.id].style.maxHeight = 0;
-          this.refs[project.id].style.margin = '0 0 0 -1em';
-          this.refs[project.id].style.opacity = 0;
+          // this.refs[project.id].style.maxHeight = 0;
+          // this.refs[project.id].style.margin = '0 0 0 -1em';
+          // this.refs[project.id].style.opacity = 0;
             
-          setTimeout(() => this.props.onDeleteProject(project.id), 300);
+          // setTimeout(() => this.props.onDeleteProject(project.id), 300);
+          this.setState({ modal: {
+            show: true,
+            taskOrProject: 'project',
+            name: project.name,
+          }})
           }}>✕</div>
 
           <form ref={`${project.id}-form`} onSubmit={(e) => {
@@ -179,6 +188,10 @@ class TaskList extends Component {
         </div>
       )
     })}
+
+    {this.state.modal.show &&
+      <Modal {...this.state.modal} />
+    }
 
     </div>
   )}
