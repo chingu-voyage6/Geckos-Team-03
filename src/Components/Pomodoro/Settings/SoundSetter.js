@@ -41,11 +41,6 @@ class SoundSetter extends Component {
   
           this.handleSoundSelect(this.props.sounds[newIndex]);
         }}>&gt;</a>
-        <div className='sound-progress'>
-          {this.props.sounds.map((sound, index) => {
-            return <div onClick={() => this.handleSoundSelect(this.props.sounds[index])} key={`${sound}`} className={sound === this.props.timer.sound ? 'sound-progress-tab sound-progress-tab-active' : 'sound-progress-tab'}></div>
-          })}
-        </div>
       </div>
     )
   }

@@ -82,7 +82,7 @@ class View extends Component {
         work={this.props.work}
         break={this.props.break}
         longBreak={this.props.longBreak}
-        goal={this.props.goal}
+        estimate={this.props.estimate}
         pomodoroSet={this.props.pomodoroSet}
         sounds={this.props.sounds}
         workSound={this.props.work.sound}

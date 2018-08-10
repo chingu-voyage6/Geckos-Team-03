@@ -6,7 +6,7 @@
 .sound-prev-arrow,
 .sound-next-arrow {
   font-size: .8em;
-  color: var(--grey);
+  color: var(--black);
   transition: color .3s;
 }
 .sound-prev-arrow:hover,
@@ -22,17 +22,23 @@
   background: var(--medgrey);
   padding: 2px;
   width: 1em;
-  height: 1em;
+  height: 100%;
   border-radius: 100%;
-  margin-right: .5em;
-  transition: background .3s;
   position: absolute;
-  left: 2em;
+  left: 5em;
+}
+
+.settings-sound .sound-icon:hover {
+  cursor: pointer;
 }
 
 .settings-sound i {
   font-size: .7em;
   color: var(--grey);
+  transition: .3s;
+}
+.settings-sound .sound-icon:hover i {
+  color: var(--black);
 }
 
 .settings-sound ul {
@@ -46,36 +52,6 @@
   transition: .2s;
 }
 
-.settings-sound ul li:hover {
-  cursor: pointer;
-  color: var(--lightgrey);
-}
-
-.settings-sound:hover .sound-progress-tab {
-  opacity: 1;
-}
-
 .sound-hidden {
   display: none;
-}
-
-.sound-progress {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 12px;
-  border-radius: 6px;
-  flex-basis: 100%;
-  padding-bottom: 15px;
-}
-
-.sound-progress-tab {
-  background: var(--grey);
-  height: 13px;
-  width: 13px;
-  margin: 0 4px;
-  border-radius: 100%;
-  transition: .3s;
-  opacity: 0;
 }

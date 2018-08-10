@@ -19,11 +19,11 @@ class Settings extends Component {
     <div className="timer-settings">
 
       <div className="timertitles">
-        <div className="timertitle work-title"
+        <div className={this.state.selectedTimer === 'work' ? 'timertitle work-title settings-selected-timer' : 'timertitle work-title'}
           onClick={() => this.setState({ selectedTimer: 'work' })}>Work</div>
-        <div className="timertitle break-title"
+        <div className={this.state.selectedTimer === 'break' ? 'timertitle break-title settings-selected-timer' : 'timertitle break-title'}
           onClick={() => this.setState({ selectedTimer: 'break' })}>Break</div>
-        <div className="timertitle long-break-title"
+        <div className={this.state.selectedTimer === 'longBreak' ? 'timertitle long-break-title settings-selected-timer' : 'timertitle long-break-title'}
           onClick={() => this.setState({ selectedTimer: 'longBreak' })}>Long Break</div>
       </div>
 

@@ -5,7 +5,7 @@
   align-items: center;
 
   transition: color 0.2s;
-  border-bottom: 1px solid var(--grey);
+  border-top: 1px solid var(--lightblue);
   text-transform: lowercase;
   width: 100%;
   position: relative;
@@ -21,4 +21,25 @@
 
 .decrement:hover, .increment:hover {
   cursor: pointer;
+}
+
+.work-title.settings-selected-timer {
+  color: var(--black);
+  border-bottom: 6px solid var(--darkblue) !important;
+}
+.break-title.settings-selected-timer {
+  color: var(--black);
+  border-bottom: 6px solid var(--grey) !important;
+}
+.long-break-title.settings-selected-timer {
+  color: var(--black);
+  border-bottom: 6px solid var(--green) !important;
+}
+
+.noselect {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
