@@ -16,6 +16,14 @@ class TimeSetter extends Component {
     // set state
     this.props.changeState({ [timer.name]: timer })
 
+    // set current timer if it is the one being changed and it has not started
+    const activeTimer = this.props.activeTimer;
+    if (timer.name === activeTimer.name && activeTimer.duration === activeTimer.timeRemaining) {
+      activeTimer.duration = timer.duration;
+      activeTimer.timeRemaining = timer.duration;
+      this.setState({ activeTimer });
+    }
+
     // recurse the function if mouse click is held
     setTimeout(() => {
       if (this.props.mouseDown) this.handleDurationChange(change);

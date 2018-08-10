@@ -51,6 +51,11 @@ class View extends Component {
         />
 
         <ShowTime
+          // these are to reset the timer
+          changeState={this.props.changeState}
+          activeTimer={this.props.activeTimer}
+          work={this.props.work}
+
           font={this.props.styles.font}
           timeRemaining={this.props.activeTimer.timeRemaining}
         />

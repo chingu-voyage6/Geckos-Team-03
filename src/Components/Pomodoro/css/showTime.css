@@ -1,13 +1,25 @@
-
 .show-time {
-  display: flex;
+  /* display: flex; */
+
   font-size: 2.5em;
   color: var(--darkblue);
-  /* background: var(--lightgrey); */
   padding: .1em;
   margin: .1em;
   line-height: 1em;
   border-radius: 6px;
-  /* border: 1px solid red; */
+  position: relative;
 }
 
+.pomodoro-refresh-icon {
+  position: absolute;
+  font-size: .35em;
+  top: -1em;
+  right: -1em;
+  color: var(--grey);
+}
+
+.pomodoro-refresh-icon:hover {
+  color: red;
+  opacity: .4;
+  cursor: pointer;
+}

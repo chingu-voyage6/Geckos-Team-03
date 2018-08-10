@@ -6,24 +6,6 @@ class PlayPause extends Component {
     super(props);
 
     this.handlePlayPause = this.handlePlayPause.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-  }
-
-  handleReset() {
-    const activeTimer = {...this.props.activeTimer};
-    
-    // end any running timer function
-    clearInterval(activeTimer.intervalID);
-    
-    const duration = this.props.work.duration;
-    
-    // default back to work timer
-    activeTimer.name = 'work';
-    activeTimer.timeRemaining = duration;
-    activeTimer.duration = duration;
-    activeTimer.paused = true;
-
-    this.props.changeState({ activeTimer });
   }
 
   handlePlayPause() {
