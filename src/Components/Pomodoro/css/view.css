@@ -39,6 +39,10 @@
   opacity: .6;
 }
 
+.pomodoro-main-content {
+  opacity: 0;
+}
+
 .pomodoro-details {
   display: flex;
   flex-direction: column;

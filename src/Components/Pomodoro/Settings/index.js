@@ -14,9 +14,13 @@ class Settings extends Component {
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => this.refs.timerSettings.style.opacity = 1, 0);
+  }
+
   render() {
     return (
-    <div className="timer-settings">
+    <div ref="timerSettings" className="timer-settings">
 
       <div className="timertitles">
         <div className={this.state.selectedTimer === 'work' ? 'timertitle work-title settings-selected-timer' : 'timertitle work-title'}

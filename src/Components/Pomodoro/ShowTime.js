@@ -22,6 +22,7 @@ class ShowTime extends Component {
     activeTimer.timeRemaining = duration;
     activeTimer.duration = duration;
     activeTimer.paused = true;
+    activeTimer.progressPercent = 0;
 
     this.props.changeState({ activeTimer });
   }

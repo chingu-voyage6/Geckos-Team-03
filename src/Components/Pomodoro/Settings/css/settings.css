@@ -1,3 +1,7 @@
+.timer-settings {
+  opacity: 0;
+  transition: .3s;
+}
 
 .settings-item {
   display: flex;
