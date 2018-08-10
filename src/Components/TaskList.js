@@ -11,11 +11,15 @@ class TaskList extends Component {
       projectAddTaskInput: '',
       modal: {
         show: false,
+        taskOrProject: '',
+        target: {},
       }
     }
     this.setMaxHeights = this.setMaxHeights.bind(this);
     this.handleProjectAddTaskChange = this.handleProjectAddTaskChange.bind(this);
     this.handleProjectAddTaskBlur = this.handleProjectAddTaskBlur.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
   
   componentDidMount() {
@@ -85,6 +89,45 @@ class TaskList extends Component {
     this.refs[`${projectId}-form`].style.maxHeight = 0;
     this.setState({ projectAddTaskInput: '' });
   }
+
+  toggleModal(taskOrProject = '', target = '') {
+    this.setState({ 
+      modal: { 
+        show: !this.state.modal.show,
+        taskOrProject,
+        target
+      } 
+    })
+  }
+
+  onDelete(taskOrProject, target) {
+    this.toggleModal();
+
+    // styling changes common to projects and tasks
+    setTimeout(() => {
+      this.refs[target.id].style.maxHeight = 0;
+      this.refs[target.id].style.opacity = 0;
+    }, 0)
+
+    // styling changes and delete for projects
+    if (taskOrProject === 'project') {
+      setTimeout(() => {
+        this.refs[target.id].style.margin = '0 0 0 -1em';
+      }, 0);
+        
+      setTimeout(() => this.props.onDeleteProject(target.id), 300);
+    }
+
+    // styling changes and delete for tasks
+    if (taskOrProject === 'task') {
+      setTimeout(() => {
+        this.refs[target.id].style.marginBottom = 0;
+        this.refs[target.id].style.overflow = 'hidden';
+      }, 0)
+
+      setTimeout(() => this.props.onDeleteTask(target.id), 300);
+    }
+  }
   
   render() {
 
@@ -108,10 +151,7 @@ class TaskList extends Component {
                 {task.name}
               </span>
 
-              <div className='delete-button' onClick={() => {
-                this.refs[task.id].style.opacity = 0;
-                setTimeout(() => this.props.onDeleteTask(task.id), 300);
-              }}>✕</div>
+              <div className='delete-button' onClick={() => this.toggleModal('task', task)}>✕</div>
 
               {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
             </li>
@@ -140,18 +180,7 @@ class TaskList extends Component {
           ✕
         </div>
 
-        <div className='delete-button' onClick={() => {
-          // this.refs[project.id].style.maxHeight = 0;
-          // this.refs[project.id].style.margin = '0 0 0 -1em';
-          // this.refs[project.id].style.opacity = 0;
-            
-          // setTimeout(() => this.props.onDeleteProject(project.id), 300);
-          this.setState({ modal: {
-            show: true,
-            taskOrProject: 'project',
-            name: project.name,
-          }})
-          }}>✕</div>
+        <div className='delete-button' onClick={() => this.toggleModal('project', project)}>✕</div>
 
           <form ref={`${project.id}-form`} onSubmit={(e) => {
             this.props.onProjectAddTask(e, this.state.projectAddTaskInput, project.id);
@@ -170,13 +199,7 @@ class TaskList extends Component {
                   {task.name}
                 </span>
 
-                <div className='delete-button' onClick={() => {
-                  this.refs[task.id].style.maxHeight = 0;
-                  this.refs[task.id].style.marginBottom = 0;
-                  this.refs[task.id].style.opacity = 0;
-                  this.refs[task.id].style.overflow = 'hidden';
-                  setTimeout(() => this.props.onDeleteTask(task.id), 300);
-                }}>✕</div>
+                <div className='delete-button' onClick={() => this.toggleModal('task', task)}>✕</div>
 
                 {task.selected ? <div className='task-border mwidth-100' /> : <div className='task-border' />}
               </li>
@@ -190,7 +213,7 @@ class TaskList extends Component {
     })}
 
     {this.state.modal.show &&
-      <Modal {...this.state.modal} />
+      <Modal {...this.state.modal} onToggle={this.toggleModal} onDelete={this.onDelete}/>
     }
 
     </div>
