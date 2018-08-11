@@ -63,6 +63,20 @@ class App extends Component {
     this.handleAddTask = this.handleAddTask.bind(this);
     this.handleDeleteTask = this.handleDeleteTask.bind(this);
     this.handleMoveTask = this.handleMoveTask.bind(this);
+
+    // ID for adding state to local storage
+    this.lucidAppId = 'e987aa34-d81a-4624-8640-f964bcd81d4d';
+  }
+
+  // LIFE CYCLE EVENTS
+
+  // load local storage state, if any
+  componentDidMount() {
+    if (localStorage[this.lucidAppId]) this.setState(JSON.parse(localStorage.getItem(this.lucidAppId)));
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem(this.lucidAppId, JSON.stringify(this.state));
   }
 
   // toggles whether the task passed in is selected, and deselects all other tasks
