@@ -115,6 +115,14 @@ class Pomodoro extends Component {
   componentDidMount() {
     document.addEventListener('mousedown', this.setMouseDown);
     document.addEventListener('mouseup', this.setMouseUp);
+
+    // save settings for this particular pomodoro in local storage
+    // pause pomodoro (navigating away will stop any timer functions)
+    if (localStorage[this.props.thisTool.id]) {
+      const state = JSON.parse(localStorage.getItem(this.props.thisTool.id));
+      state.activeTimer.paused = true;
+      this.setState(state);
+    }
   }
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.setMouseDown);
@@ -125,6 +133,10 @@ class Pomodoro extends Component {
     clearInterval(activeTimer.intervalID);
   }
 
+  componentDidUpdate() {
+    // update local storage state when component is updated
+    localStorage.setItem(this.props.thisTool.id, JSON.stringify(this.state));
+  }
 
   // -----------------------------------------------------------------------------------------
   //                                                                              FUNCTIONS

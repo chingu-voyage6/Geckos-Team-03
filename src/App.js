@@ -65,6 +65,17 @@ class App extends Component {
     this.handleMoveTask = this.handleMoveTask.bind(this);
   }
 
+  // LIFE CYCLE EVENTS
+
+  // load local storage state, if any
+  componentDidMount() {
+    if (localStorage.lucidState) this.setState(JSON.parse(localStorage.getItem('lucidState')));
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('lucidState', JSON.stringify(this.state));
+  }
+
   // toggles whether the task passed in is selected, and deselects all other tasks
   handleSelectTask(e) {
     const tasks = [...this.state.tasks];
