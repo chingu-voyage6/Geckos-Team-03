@@ -19,27 +19,49 @@
   font-weight: 400;
 }
 
-.btn-add-tool {
-  font-weight: 400;
-  font-size: 1em;
-  padding-left: .5rem;
-  margin: 0 auto;
-  line-height: 1em;
-
+.add-tool-field {
   border: none;
   width: 100%;
-  border-bottom: 3px solid rgba(0,0,0,0);
-
+  
   background: #fff;
   color: var(--darkblue);
   border-radius: 6px;
-  padding: .6em;
   text-align: center;
+  transition: .3s;
+  max-height: 2.2rem;
+  overflow: hidden;
   transition: .3s;
 }
 
-.btn-add-tool:hover {
+.add-tool-field.add-tool-open {
+  max-height: 12em;
+}
+
+.add-tool-open .add-tool-title {
+  cursor: pointer;
+  border-bottom: 3px solid var(--grey);
+}
+
+.add-tool-title {
+  font-weight: 400;
+  font-size: 1em;
+  margin: 0 auto;
+  line-height: 1em;
+  padding: .6em;
+}
+
+.add-tool-open .add-tool-title,
+.add-tool-title:hover {
   cursor: pointer;
   background: var(--grey);
   color: #fff;
+}
+
+.add-tool-option {
+  padding: .6em;
+}
+
+.add-tool-option:hover {
+  cursor: pointer;
+  background: var(--lightgrey);
 }
