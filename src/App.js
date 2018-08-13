@@ -88,14 +88,16 @@ class App extends Component {
   }
 
   // adds a tool to selected task (for now just a pomodoro timer)
-  handleAddTool(taskID) {
+  handleAddTool(taskID, toolName) {
     const tasks = [...this.state.tasks];
-    tasks.forEach(task => {
-      if (task.id === taskID) task.tools.push({
-        name: 'Pomodoro',
-        id: this.uuidv4(),
+    if (toolName === 'PomodoroTool' || toolName === 'NoteTool' || toolName === 'TodoTool') {
+      tasks.forEach(task => {
+        if (task.id === taskID) task.tools.push({
+          name: toolName,
+          id: this.uuidv4(),
+        });
       });
-    });
+    }
     this.setState({ tasks });
   }
 

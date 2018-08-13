@@ -8,7 +8,7 @@ import Triumph from './Sounds/triumph.mp3';
 import LevelUp from './Sounds/levelup.mp3';
 import Winning from './Sounds/winning.mp3';
 
-class Pomodoro extends Component {
+class PomodoroTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -253,4 +253,4 @@ class Pomodoro extends Component {
   }
 }
 
-export default Pomodoro;
+export default PomodoroTool;
