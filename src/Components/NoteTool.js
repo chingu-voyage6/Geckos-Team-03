@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import './css/tools.css';
+import './css/notetool.css';
 
 class NoteTool extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
   componentDidMount() {
     setTimeout(() => {
@@ -10,6 +19,20 @@ class NoteTool extends Component {
       this.refs.container.style.marginBottom = '2em';
       this.refs.container.style.padding = '1.5em 1em';
     }, 0);
+
+    // save settings for this particular note in local storage
+    if (localStorage[this.props.thisTool.id]) {
+      this.setState(JSON.parse(localStorage.getItem(this.props.thisTool.id)));
+    }
+  }
+
+  componentDidUpdate() {
+    // update local storage state when component is updated
+    localStorage.setItem(this.props.thisTool.id, JSON.stringify(this.state));
+  }
+
+  handleInputChange() {
+    this.setState({ input: this.refs.noteInput.value });
   }
 
   render() {
@@ -25,7 +48,7 @@ class NoteTool extends Component {
           setTimeout(() => this.props.onDeleteTool(this.props.thisTool.id), 300)
         }}>✕</div>
 
-        This will be a note tool.
+        <textarea placeholder='Enter a note for this task...' className='note-input' ref='noteInput' onChange={this.handleInputChange} value={this.state.input} />
       </div>
     )
   }

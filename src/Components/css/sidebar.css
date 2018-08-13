@@ -48,6 +48,7 @@
   margin: 0 auto;
   line-height: 1em;
   padding: .6em;
+  transition: .3s;
 }
 
 .add-tool-open .add-tool-title,
@@ -59,6 +60,7 @@
 
 .add-tool-option {
   padding: .6em;
+  /* transition: .3s; */
 }
 
 .add-tool-option:hover {
