@@ -178,7 +178,7 @@ ul.project-tasks input:checked ~ .task-item {
 .task-border {
   height: 4px;
   width: 100%;
-  background: var(--green);
+  background: var(--babyblue);
   position: absolute;
   bottom: -.2em;
   left: -.2em;

@@ -5,6 +5,7 @@ import Counters from './Counters';
 import Progress from './Progress';
 import TimerTitles from './TimerTitles';
 import Settings from './Settings';
+import '../css/tools.css';
 import './css/view.css';
 
 // view controller for pomodoro component
@@ -21,7 +22,7 @@ class View extends Component {
 
   render() {
     return (
-    <div ref='container' className="pomodoro-container">
+    <div ref='container' className="tool-container">
 
     {/* ICON BUTTONS */}
 

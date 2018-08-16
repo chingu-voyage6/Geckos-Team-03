@@ -11,7 +11,6 @@ class Sidebar extends Component {
     this.state = {
       showToolOptions: false,
     }
-    this.uuidv4 = require('uuid/v4');
   }
 
   render() { 
@@ -27,6 +26,7 @@ class Sidebar extends Component {
           } else if (tool.name === 'TodoTool') {
             return (<TodoTool key={tool.id} thisTool={tool} onDeleteTool={this.props.onDeleteTool} />)
           }
+          return '';
         })}
         {this.props.selectedTask &&
           (<div onClick={() => this.setState({ showToolOptions: !this.state.showToolOptions })} className={this.state.showToolOptions ? 'add-tool-field add-tool-open' : 'add-tool-field'}>
